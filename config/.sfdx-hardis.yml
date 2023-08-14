@@ -1,0 +1,5 @@
+projectName: UbiquitousLamp
+devHubAlias: DevHub_UbiquitousLamp
+developmentBranch: integration
+autoCleanTypes:
+  - destructivechanges
