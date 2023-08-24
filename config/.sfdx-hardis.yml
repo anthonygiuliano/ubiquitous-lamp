@@ -1,0 +1,26 @@
+projectName: UbiquitousLamp
+devHubAlias: DevHub_UbiquitousLamp
+developmentBranch: integration
+autoCleanTypes:
+  - destructivechanges
+installedPackages:
+  - Id: 0A38b000001opiJCAQ
+    SubscriberPackageId: 03330000000wDAbAAM
+    SubscriberPackageName: Salesforce Connected Apps
+    SubscriberPackageNamespace: sf_com_apps
+    SubscriberPackageVersionId: 04t30000001DUvrAAG
+    SubscriberPackageVersionName: Winter '16
+    SubscriberPackageVersionNumber: 1.7.0.1
+    installOnScratchOrgs: true
+    installDuringDeployments: true
+  - Id: 0A38b000001opiKCAQ
+    SubscriberPackageId: 0336g0000004k1fAAA
+    SubscriberPackageName: Trailhead Playground
+    SubscriberPackageNamespace: trlhdtips
+    SubscriberPackageVersionId: 04t6g000008C5dNAAS
+    SubscriberPackageVersionName: Trailhead Playground App - Spring 2022 (v1.9)
+    SubscriberPackageVersionNumber: 1.9.0.1
+    installOnScratchOrgs: true
+    installDuringDeployments: true
+deploymentPlan:
+  packages: []
