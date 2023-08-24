@@ -1,8 +1,27 @@
 projectName: UbiquitousLamp
 devHubAlias: DevHub_UbiquitousLamp
+devHubUsername: agiuliano@brave-badger-rpxpek.com
 developmentBranch: integration
 autoCleanTypes:
   - destructivechanges
+  - datadotcom
+  - minimizeProfiles
+  - listViewsMine
+  - dashboards
+  - systemDebug
+autoRemoveUserPermissions:
+  - EnableCommunityAppLauncher
+  - FieldServiceAccess
+  - OmnichannelInventorySync
+  - SendExternalEmailAvailable
+  - UseOmnichannelInventoryAPIs
+  - ViewDataLeakageEvents
+  - ViewMLModels
+  - ViewPlatformEvents
+  - WorkCalibrationUser
+autoRetrieveWhenPull:
+  - CustomMetadata
+  - RecordTypes
 installedPackages:
   - Id: 0A38b000001opiJCAQ
     SubscriberPackageId: 03330000000wDAbAAM
@@ -22,5 +41,6 @@ installedPackages:
     SubscriberPackageVersionNumber: 1.9.0.1
     installOnScratchOrgs: true
     installDuringDeployments: true
+installPackagesDuringCheckDeploy: true
 deploymentPlan:
   packages: []
