@@ -22,3 +22,5 @@ installedPackages:
     SubscriberPackageVersionNumber: 1.9.0.1
     installOnScratchOrgs: true
     installDuringDeployments: true
+deploymentPlan:
+  packages: []
