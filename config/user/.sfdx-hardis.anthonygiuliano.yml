@@ -1,2 +1,4 @@
 installedApps:
   - git
+  - openssl
+sfdxPluginsStdout: "env \e[2m2.1.20\e[22m\e[2m (2.1.20)\e[22m\npackaging \e[2m1.22.2\e[22m\nsfdmu \e[2m4.30.0\e[22m\nsfdx-essentials \e[2m2.12.0\e[22m\nsfdx-git-delta \e[2m5.24.2\e[22m\nsfdx-hardis \e[2m4.1.1\e[22m\ntexei-sfdx-plugin \e[2m1.17.3\e[22m\n"
