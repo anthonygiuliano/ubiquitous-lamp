@@ -1,6 +1,6 @@
 projectName: UbiquitousLamp
-devHubAlias: DevHub_UbiquitousLamp
-devHubUsername: agiuliano@brave-badger-rpxpek.com
+devHubAlias: ag-prod
+devHubUsername: agiuliano@resourceful-wolf-ma8qhs.com
 developmentBranch: integration
 autoCleanTypes:
   - destructivechanges
