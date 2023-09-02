@@ -57,7 +57,7 @@ jobs:
       - name: Installing SFDX scanner
         run: sf plugins install @salesforce/sfdx-scanner
       - name: Scan code
-        run: sf scanner run --format sarif --target 'changed-sources/**/*.cls' --projectdir changed-sources --category 'Design,Best Practices,Performance,Code Style,Security' --outfile 'apexScanResults.sarif' --loglevel DEBUG --verbose
+        run: sf scanner run --format sarif --target 'changed-sources/**/*.cls' --projectdir changed-sources --category 'Design,Best Practices,Performance,Code Style,Security' --outfile 'changed-sources/apexScanResults.sarif' --loglevel DEBUG --verbose
       # - name: Scan code
       #   run: sfdx scanner:run --format sarif --target 'changed-sources/**/*.cls'
       #     --category 'Design,Best Practices,Performance,Code Style,Security'
