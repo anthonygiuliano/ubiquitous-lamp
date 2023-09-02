@@ -36,7 +36,7 @@ jobs:
           sf plugins 
       - name: Create delta packages for new, modified or deleted metadata
         run: |
-          mkdir -p changed-sources/force-app
+          mkdir changed-sources
           sf sgd source delta --to "HEAD" --from "HEAD^" --output changed-sources/ --generate-delta --source force-app/ 
       - name: Installing java
         run: sudo apt-get update && sudo apt-get install default-jdk
@@ -50,4 +50,8 @@ jobs:
           sarif_file: changed-sources/apexScanResults.sarif
       - name: Deployment - run all tests
         run: |
-          sf project deploy start --source-dir changed-sources/force-app --dry-run --test-level RunLocalTests --json
+          if [ -d "changed-sources/force-app" ]; then
+            sf project deploy start --source-dir changed-sources/force-app --dry-run --test-level RunLocalTests --json
+          else
+              echo "no changes to deploy"
+          fi
