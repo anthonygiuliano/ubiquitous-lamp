@@ -23,7 +23,7 @@ autoRetrieveWhenPull:
   - CustomMetadata
   - RecordTypes
 installedPackages:
-  - Id: 0A38b000001opiJCAQ
+  - Id: 0A38b000001qso8CAA
     SubscriberPackageId: 03330000000wDAbAAM
     SubscriberPackageName: Salesforce Connected Apps
     SubscriberPackageNamespace: sf_com_apps
@@ -32,7 +32,7 @@ installedPackages:
     SubscriberPackageVersionNumber: 1.7.0.1
     installOnScratchOrgs: true
     installDuringDeployments: true
-  - Id: 0A38b000001opiKCAQ
+  - Id: 0A38b000001qso9CAA
     SubscriberPackageId: 0336g0000004k1fAAA
     SubscriberPackageName: Trailhead Playground
     SubscriberPackageNamespace: trlhdtips
