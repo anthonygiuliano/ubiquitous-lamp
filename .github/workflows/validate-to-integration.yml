@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - force-app/**
+      - .github/workflows/**
     branches:
       - hardis-setup
 env:
