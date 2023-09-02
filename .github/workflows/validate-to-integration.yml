@@ -53,7 +53,7 @@ jobs:
           --category 'Design,Best Practices,Performance,Code Style,Security'
           --outfile 'apexScanResults.sarif'
       - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@v1
+        uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: changed-sources/apexScanResults.sarif
       - name: Deployment - run all tests
