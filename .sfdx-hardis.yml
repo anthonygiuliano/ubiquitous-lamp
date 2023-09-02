@@ -16,3 +16,121 @@ installedPackages:
     SubscriberPackageVersionId: 04t6g000008C5dNAAS
     SubscriberPackageVersionName: Trailhead Playground App - Spring 2022 (v1.9)
     SubscriberPackageVersionNumber: 1.9.0.1
+deploymentPlan:
+  packages:
+    - label: Deploy SharingRules - Account
+      packageXmlFile: manifest/splits/packageXmlSharingRulesAccount.xml
+      order: 30
+      waitAfter: 30
+    - label: Deploy SharingRules - ActivityRecurrence2
+      packageXmlFile: manifest/splits/packageXmlSharingRulesActivityRecurrence2.xml
+      order: 31
+      waitAfter: 30
+    - label: Deploy SharingRules - ActivityRecurrence2Exception
+      packageXmlFile: manifest/splits/packageXmlSharingRulesActivityRecurrence2Exception.xml
+      order: 32
+      waitAfter: 30
+    - label: Deploy SharingRules - AssistantInteraction
+      packageXmlFile: manifest/splits/packageXmlSharingRulesAssistantInteraction.xml
+      order: 33
+      waitAfter: 30
+    - label: Deploy SharingRules - AssistantRecommendation
+      packageXmlFile: manifest/splits/packageXmlSharingRulesAssistantRecommendation.xml
+      order: 34
+      waitAfter: 30
+    - label: Deploy SharingRules - CalendarModel
+      packageXmlFile: manifest/splits/packageXmlSharingRulesCalendarModel.xml
+      order: 35
+      waitAfter: 30
+    - label: Deploy SharingRules - CalendarView
+      packageXmlFile: manifest/splits/packageXmlSharingRulesCalendarView.xml
+      order: 36
+      waitAfter: 30
+    - label: Deploy SharingRules - Case
+      packageXmlFile: manifest/splits/packageXmlSharingRulesCase.xml
+      order: 37
+      waitAfter: 30
+    - label: Deploy SharingRules - CleanLeadBackup
+      packageXmlFile: manifest/splits/packageXmlSharingRulesCleanLeadBackup.xml
+      order: 38
+      waitAfter: 30
+    - label: Deploy SharingRules - ComponentResponseCache
+      packageXmlFile: manifest/splits/packageXmlSharingRulesComponentResponseCache.xml
+      order: 39
+      waitAfter: 30
+    - label: Deploy SharingRules - Contact
+      packageXmlFile: manifest/splits/packageXmlSharingRulesContact.xml
+      order: 40
+      waitAfter: 30
+    - label: Deploy SharingRules - ConvCoachingRecommendation
+      packageXmlFile: manifest/splits/packageXmlSharingRulesConvCoachingRecommendation.xml
+      order: 41
+      waitAfter: 30
+    - label: Deploy SharingRules - FlowInterview
+      packageXmlFile: manifest/splits/packageXmlSharingRulesFlowInterview.xml
+      order: 42
+      waitAfter: 30
+    - label: Deploy SharingRules - FlowInterviewLog
+      packageXmlFile: manifest/splits/packageXmlSharingRulesFlowInterviewLog.xml
+      order: 43
+      waitAfter: 30
+    - label: Deploy SharingRules - FlowOrchestrationLog
+      packageXmlFile: manifest/splits/packageXmlSharingRulesFlowOrchestrationLog.xml
+      order: 44
+      waitAfter: 30
+    - label: Deploy SharingRules - FlowOrchestrationStageInstance
+      packageXmlFile: manifest/splits/packageXmlSharingRulesFlowOrchestrationStageInstance.xml
+      order: 45
+      waitAfter: 30
+    - label: Deploy SharingRules - FlowOrchestrationStepInstance
+      packageXmlFile: manifest/splits/packageXmlSharingRulesFlowOrchestrationStepInstance.xml
+      order: 46
+      waitAfter: 30
+    - label: Deploy SharingRules - FlowTestResult
+      packageXmlFile: manifest/splits/packageXmlSharingRulesFlowTestResult.xml
+      order: 47
+      waitAfter: 30
+    - label: Deploy SharingRules - Lead
+      packageXmlFile: manifest/splits/packageXmlSharingRulesLead.xml
+      order: 48
+      waitAfter: 30
+    - label: Deploy SharingRules - LearningItem
+      packageXmlFile: manifest/splits/packageXmlSharingRulesLearningItem.xml
+      order: 49
+      waitAfter: 30
+    - label: Deploy SharingRules - ListEmail
+      packageXmlFile: manifest/splits/packageXmlSharingRulesListEmail.xml
+      order: 50
+      waitAfter: 30
+    - label: Deploy SharingRules - NotifDeliveryUserPref
+      packageXmlFile: manifest/splits/packageXmlSharingRulesNotifDeliveryUserPref.xml
+      order: 51
+      waitAfter: 30
+    - label: Deploy SharingRules - Opportunity
+      packageXmlFile: manifest/splits/packageXmlSharingRulesOpportunity.xml
+      order: 52
+      waitAfter: 30
+    - label: Deploy SharingRules - ReportResultBlob
+      packageXmlFile: manifest/splits/packageXmlSharingRulesReportResultBlob.xml
+      order: 53
+      waitAfter: 30
+    - label: Deploy SharingRules - SiqUserBlacklist
+      packageXmlFile: manifest/splits/packageXmlSharingRulesSiqUserBlacklist.xml
+      order: 54
+      waitAfter: 30
+    - label: Deploy SharingRules - TodayGoal
+      packageXmlFile: manifest/splits/packageXmlSharingRulesTodayGoal.xml
+      order: 55
+      waitAfter: 30
+    - label: Deploy SharingRules - UserAppMenuCustomization
+      packageXmlFile: manifest/splits/packageXmlSharingRulesUserAppMenuCustomization.xml
+      order: 56
+      waitAfter: 30
+    - label: Deploy SharingRules - UserEmailPreferredPerson
+      packageXmlFile: manifest/splits/packageXmlSharingRulesUserEmailPreferredPerson.xml
+      order: 57
+      waitAfter: 30
+    - label: Deploy SharingRules - WorkAccess
+      packageXmlFile: manifest/splits/packageXmlSharingRulesWorkAccess.xml
+      order: 58
+      waitAfter: 30
