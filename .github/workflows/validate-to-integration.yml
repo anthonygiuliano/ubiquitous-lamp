@@ -8,6 +8,7 @@ on:
       - hardis-setup
 jobs:
   validate-to-integration:
+    permissions: write-all
     runs-on: ubuntu-latest
     environment: integration
     steps:
