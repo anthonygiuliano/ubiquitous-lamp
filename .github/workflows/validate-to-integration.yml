@@ -19,56 +19,35 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Install sf CLI
+      - name: Install sf cli
         run: |
           wget https://developer.salesforce.com/media/salesforce-cli/sf/channels/stable/sf-linux-x64.tar.xz
-          mkdir -p ~/cli/sf
-          tar xJf sf-linux-x64.tar.xz -C ~/cli/sf --strip-components 1
-          echo "$HOME/cli/sf/bin" >> $GITHUB_PATH
-          ~/cli/sf/bin/sf version
-      # - name: Install sfdx CLI
-      #   run: |
-      #     wget https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sfdx-linux-x64.tar.xz
-      #     mkdir -p ~/cli/sfdx
-      #     tar xJf sfdx-linux-x64.tar.xz -C ~/cli/sfdx --strip-components 1
-      #     echo "$HOME/cli/sfdx/bin" >> $GITHUB_PATH
-      #     ~/cli/sfdx/bin/sfdx version
+          mkdir -p ~/sf
+          tar xJf sf-linux-x64.tar.xz -C ~/sf --strip-components 1
+          echo "$HOME/sf/bin" >> $GITHUB_PATH
+          ~/sf/bin/sf version
       - name: Populate auth file with secret of target org
         run: echo ${{secrets.INTEGRATION_URL}} > ./INTEGRATION_URL.txt
       - name: Authenticate to target org
         run: sf auth sfdxurl store --sfdx-url-file ./INTEGRATION_URL.txt --alias ag-integration --set-default
-        # run: sfdx auth:sfdxurl:store -f ./INTEGRATION_URL.txt -s -a targetOrg
       - name: Installing sfdx git delta
         run: |
           echo y | sf plugins install sfdx-git-delta
-          sfdx plugins 
-        # run: |
-        #   echo y | sfdx plugins:install sfdx-git-delta
-        #   sfdx plugins 
+          sf plugins 
       - name: Create delta packages for new, modified or deleted metadata
         run: |
-          mkdir changed-sources
+          mkdir -p changed-sources/force-app
           sf sgd source delta --to "HEAD" --from "HEAD^" --output changed-sources/ --generate-delta --source force-app/ 
-        # run: |
-        #   mkdir changed-sources
-        #   sfdx sgd:source:delta --to "HEAD" --from "HEAD^" --output changed-sources/ --generate-delta --source force-app/ 
       - name: Installing java
         run: sudo apt-get update && sudo apt-get install default-jdk
       - name: Installing SFDX scanner
         run: sf plugins install @salesforce/sfdx-scanner
       - name: Scan code
-        run: sf scanner run --format sarif --target 'changed-sources/**/*.cls' --projectdir changed-sources --category 'Design,Best Practices,Performance,Code Style,Security' --outfile 'changed-sources/apexScanResults.sarif' --loglevel DEBUG --verbose
-      # - name: Scan code
-      #   run: sfdx scanner:run --format sarif --target 'changed-sources/**/*.cls'
-      #     --category 'Design,Best Practices,Performance,Code Style,Security'
-      #     --outfile 'apexScanResults.sarif'
+        run: sf scanner run --format sarif --target "changed-sources/**/*.cls" --projectdir changed-sources --category "Design,Best Practices,Performance,Code Style,Security" --outfile changed-sources/apexScanResults.sarif --loglevel DEBUG --verbose
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: changed-sources/apexScanResults.sarif
       - name: Deployment - run all tests
         run: |
-          sf project deploy start --source-dir 'changed-sources/force-app' --dry-run --test-level RunLocalTests --json
-        # run: |
-        #   sfdx force:source:deploy -p "changed-sources/force-app" --checkonly
-        #   --testlevel RunLocalTests --json
+          sf project deploy start --source-dir changed-sources/force-app --dry-run --test-level RunLocalTests --json
