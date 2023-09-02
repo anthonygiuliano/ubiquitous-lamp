@@ -3,9 +3,13 @@ on:
   push:
     paths:
       - force-app/**
-      - .github/workflows/**
     branches:
-      - hardis-setup
+      - hardis/**
+      - dev/**
+      - fix/**
+  pull_request:
+    branches:
+      - integration
 jobs:
   validate-to-integration:
     permissions: write-all
