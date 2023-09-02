@@ -1,14 +1,36 @@
 name: Validate to Integration
 on:
-  pull_request:
-    types:
-      - opened
-      - synchronize
+  push:
     paths:
       - force-app/**
     branches:
-      - integration
+      - hardis-setup
+env:
+  test_var: ${{vars.TEST_VAR}}
 jobs:
+  welcome:
+    runs-on: ubuntu-latest
+    steps:
+      - if: ${{env.test_var == ''}}
+        run: |
+          echo "empty"
+      - if: ${{env.test_var != '' }}
+        run: |
+          echo ${{env.test_var}}
+      - name: Check secrets presence
+        id: checksecrets
+        shell: bash
+        run: |
+          if [ "$SECRET" == "" ]; then
+            echo "secretspresent=NO" >> $GITHUB_OUTPUT
+          else
+            echo "secretspresent=YES" >> $GITHUB_OUTPUT
+          fi
+        env:
+          SECRET: ${{ secrets.INTEGRATION_URL }}
+      - name: Run step if secret is present
+        if: (steps.checksecrets.outputs.secretspresent == 'YES')
+        run: echo "secret is present"
   validate-to-integration:
     runs-on: ubuntu-latest
     steps:
@@ -34,7 +56,7 @@ jobs:
       - name: Populate auth file with SFDX_URL secret of target org
         run: |
           echo ${{secrets.INTEGRATION_URL}} > ./INTEGRATION_URL.txt
-          echo ${{vars.TEST_VAR}}
+          echo vars.TEST_VAR: ${{vars.TEST_VAR}}
       - name: Authenticate to target Org
         run: sfdx auth:sfdxurl:store -f ./INTEGRATION_URL.txt -s -a targetOrg
       - name: Installing sfdx git delta
