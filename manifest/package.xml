@@ -20,169 +20,29 @@
         <name>Community</name>
     </types>
     <types>
-        <members>Account.AccountNumber</members>
-        <members>Account.AccountSource</members>
         <members>Account.Active__c</members>
-        <members>Account.AnnualRevenue</members>
-        <members>Account.BillingAddress</members>
-        <members>Account.CleanStatus</members>
         <members>Account.CustomerPriority__c</members>
-        <members>Account.DandbCompanyId</members>
-        <members>Account.Description</members>
-        <members>Account.DunsNumber</members>
-        <members>Account.Fax</members>
-        <members>Account.Industry</members>
-        <members>Account.Jigsaw</members>
-        <members>Account.NaicsCode</members>
-        <members>Account.NaicsDesc</members>
-        <members>Account.Name</members>
-        <members>Account.NumberOfEmployees</members>
         <members>Account.NumberofLocations__c</members>
-        <members>Account.OwnerId</members>
-        <members>Account.Ownership</members>
-        <members>Account.ParentId</members>
-        <members>Account.Phone</members>
-        <members>Account.Rating</members>
         <members>Account.SLAExpirationDate__c</members>
         <members>Account.SLASerialNumber__c</members>
         <members>Account.SLA__c</members>
-        <members>Account.ShippingAddress</members>
-        <members>Account.Sic</members>
-        <members>Account.SicDesc</members>
-        <members>Account.Site</members>
-        <members>Account.TickerSymbol</members>
-        <members>Account.Tier</members>
-        <members>Account.Tradestyle</members>
-        <members>Account.Type</members>
         <members>Account.UpsellOpportunity__c</members>
-        <members>Account.Website</members>
-        <members>Account.YearStarted</members>
-        <members>Case.AccountId</members>
-        <members>Case.AssetId</members>
-        <members>Case.BusinessHoursId</members>
-        <members>Case.ClosedDate</members>
-        <members>Case.Comments</members>
-        <members>Case.ContactEmail</members>
-        <members>Case.ContactFax</members>
-        <members>Case.ContactId</members>
-        <members>Case.ContactMobile</members>
-        <members>Case.ContactPhone</members>
-        <members>Case.Description</members>
         <members>Case.EngineeringReqNumber__c</members>
-        <members>Case.EntitlementId</members>
-        <members>Case.IsClosedOnCreate</members>
-        <members>Case.IsEscalated</members>
-        <members>Case.IsStopped</members>
-        <members>Case.MilestoneStatus</members>
-        <members>Case.MilestoneStatusIcon</members>
-        <members>Case.Origin</members>
-        <members>Case.OwnerId</members>
-        <members>Case.ParentId</members>
         <members>Case.PotentialLiability__c</members>
-        <members>Case.Priority</members>
-        <members>Case.ProductId</members>
         <members>Case.Product__c</members>
-        <members>Case.Reason</members>
         <members>Case.SLAViolation__c</members>
-        <members>Case.ServiceContractId</members>
-        <members>Case.SlaExitDate</members>
-        <members>Case.SlaStartDate</members>
-        <members>Case.Status</members>
-        <members>Case.StopStartDate</members>
-        <members>Case.Subject</members>
-        <members>Case.SuppliedCompany</members>
-        <members>Case.SuppliedEmail</members>
-        <members>Case.SuppliedName</members>
-        <members>Case.SuppliedPhone</members>
-        <members>Case.Type</members>
-        <members>Contact.AccountId</members>
-        <members>Contact.AssistantName</members>
-        <members>Contact.AssistantPhone</members>
-        <members>Contact.Birthdate</members>
-        <members>Contact.CleanStatus</members>
-        <members>Contact.Department</members>
-        <members>Contact.Description</members>
-        <members>Contact.DoNotCall</members>
-        <members>Contact.Email</members>
-        <members>Contact.Fax</members>
-        <members>Contact.GenderIdentity</members>
-        <members>Contact.HasOptedOutOfEmail</members>
-        <members>Contact.HasOptedOutOfFax</members>
-        <members>Contact.HomePhone</members>
-        <members>Contact.IndividualId</members>
-        <members>Contact.Jigsaw</members>
         <members>Contact.Languages__c</members>
-        <members>Contact.LastCURequestDate</members>
-        <members>Contact.LastCUUpdateDate</members>
-        <members>Contact.LeadSource</members>
         <members>Contact.Level__c</members>
-        <members>Contact.MailingAddress</members>
-        <members>Contact.MobilePhone</members>
-        <members>Contact.Name</members>
-        <members>Contact.OtherAddress</members>
-        <members>Contact.OtherPhone</members>
-        <members>Contact.OwnerId</members>
-        <members>Contact.Phone</members>
-        <members>Contact.Pronouns</members>
-        <members>Contact.ReportsToId</members>
-        <members>Contact.Title</members>
-        <members>Lead.Address</members>
-        <members>Lead.AnnualRevenue</members>
-        <members>Lead.CampaignId</members>
-        <members>Lead.CleanStatus</members>
-        <members>Lead.Company</members>
-        <members>Lead.CompanyDunsNumber</members>
         <members>Lead.CurrentGenerators__c</members>
-        <members>Lead.DandbCompanyId</members>
-        <members>Lead.Description</members>
-        <members>Lead.DoNotCall</members>
-        <members>Lead.Email</members>
-        <members>Lead.Fax</members>
-        <members>Lead.GenderIdentity</members>
-        <members>Lead.HasOptedOutOfEmail</members>
-        <members>Lead.HasOptedOutOfFax</members>
-        <members>Lead.IndividualId</members>
-        <members>Lead.Industry</members>
-        <members>Lead.Jigsaw</members>
-        <members>Lead.LastTransferDate</members>
-        <members>Lead.LeadSource</members>
-        <members>Lead.MobilePhone</members>
-        <members>Lead.Name</members>
-        <members>Lead.NumberOfEmployees</members>
         <members>Lead.NumberofLocations__c</members>
-        <members>Lead.OwnerId</members>
-        <members>Lead.Phone</members>
         <members>Lead.Primary__c</members>
         <members>Lead.ProductInterest__c</members>
-        <members>Lead.Pronouns</members>
-        <members>Lead.Rating</members>
         <members>Lead.SICCode__c</members>
-        <members>Lead.Status</members>
-        <members>Lead.Title</members>
-        <members>Lead.Website</members>
-        <members>Opportunity.AccountId</members>
-        <members>Opportunity.Amount</members>
-        <members>Opportunity.CampaignId</members>
-        <members>Opportunity.CloseDate</members>
-        <members>Opportunity.ContractId</members>
         <members>Opportunity.CurrentGenerators__c</members>
         <members>Opportunity.DeliveryInstallationStatus__c</members>
-        <members>Opportunity.Description</members>
-        <members>Opportunity.ExpectedRevenue</members>
-        <members>Opportunity.IqScore</members>
-        <members>Opportunity.IsPrivate</members>
-        <members>Opportunity.LeadSource</members>
         <members>Opportunity.MainCompetitors__c</members>
-        <members>Opportunity.Name</members>
-        <members>Opportunity.NextStep</members>
         <members>Opportunity.OrderNumber__c</members>
-        <members>Opportunity.OwnerId</members>
-        <members>Opportunity.Pricebook2Id</members>
-        <members>Opportunity.Probability</members>
-        <members>Opportunity.StageName</members>
-        <members>Opportunity.TotalOpportunityQuantity</members>
         <members>Opportunity.TrackingNumber__c</members>
-        <members>Opportunity.Type</members>
         <name>CustomField</name>
     </types>
     <types>
@@ -233,6 +93,111 @@
         <name>FlexiPage</name>
     </types>
     <types>
+        <members>Account-Account Layout</members>
+        <members>AlternativePaymentMethod-Alternative Payment Method Layout</members>
+        <members>ApiAnomalyEventStore-API Anomaly Event Store Layout</members>
+        <members>Asset-Asset Layout</members>
+        <members>AssetAction-Asset Action Layout</members>
+        <members>AssetActionSource-Asset Action Source Layout</members>
+        <members>AssetRelationship-Asset Relationship Layout</members>
+        <members>AssetStatePeriod-Asset State Period Layout</members>
+        <members>AssociatedLocation-Associated Location Layout</members>
+        <members>AuthorizationForm-Authorization Form Layout</members>
+        <members>AuthorizationFormConsent-Authorization Form Consent Layout</members>
+        <members>AuthorizationFormDataUse-Authorization Form Data Use Layout</members>
+        <members>AuthorizationFormText-Authorization Form Text Layout</members>
+        <members>BusinessBrand-Business Brand Layout</members>
+        <members>Campaign-Campaign Layout</members>
+        <members>CampaignMember-Campaign Member Page Layout</members>
+        <members>CardPaymentMethod-Card Payment Method Layout</members>
+        <members>Case-Case Layout</members>
+        <members>CaseClose-Close Case Layout</members>
+        <members>CaseMilestone-Case Milestone Layout</members>
+        <members>CommunityMemberLayout-Community Member Layout</members>
+        <members>ConsumptionRate-Consumption Rate Layout</members>
+        <members>ConsumptionSchedule-Consumption Schedule Layout</members>
+        <members>Contact-Contact Layout</members>
+        <members>ContactPointAddress-Contact Point Address Layout</members>
+        <members>ContactPointEmail-Contact Point Email Layout</members>
+        <members>ContactPointPhone-Contact Point Phone Layout</members>
+        <members>ContactPointTypeConsent-Contact Point Type Consent Layout</members>
+        <members>ContentVersion-Content Version Layout</members>
+        <members>Contract-Contract Layout</members>
+        <members>ContractLineItem-Contract Line Item Layout</members>
+        <members>CredentialStuffingEventStore-Credential Stuffing Event Store Layout</members>
+        <members>CreditMemo-Credit Memo Layout</members>
+        <members>CreditMemoLine-Credit Memo Line Layout</members>
+        <members>Customer-Customer Layout</members>
+        <members>DandBCompany-D%26B Company Layout</members>
+        <members>DataUseLegalBasis-Data Use Legal Basis Layout</members>
+        <members>DataUsePurpose-Data Use Purpose Layout</members>
+        <members>DigitalWallet-Digital Wallet Layout</members>
+        <members>DuplicateRecordSet-Duplicate Record Set Layout</members>
+        <members>EmailMessage-Email Message Layout</members>
+        <members>Entitlement-Entitlement Layout</members>
+        <members>EntityMilestone-Object Milestone Layout</members>
+        <members>Event-Event Layout</members>
+        <members>FeedItem-Feed Item Layout</members>
+        <members>FinanceBalanceSnapshot-Finance Balance Snapshot Layout</members>
+        <members>FinanceTransaction-Finance Transaction Layout</members>
+        <members>Global-Global Layout</members>
+        <members>Idea-Idea Layout</members>
+        <members>Individual-Individual Layout</members>
+        <members>Invoice-Invoice Layout</members>
+        <members>InvoiceLine-Invoice Line Layout</members>
+        <members>Lead-Lead Layout</members>
+        <members>LegalEntity-Legal Entity Layout</members>
+        <members>Location-Location Layout</members>
+        <members>Macro-Macro Layout</members>
+        <members>Opportunity-Opportunity Layout</members>
+        <members>OpportunityLineItem-Opportunity Product Layout</members>
+        <members>Order-Order Layout</members>
+        <members>OrderItem-Order Product Layout</members>
+        <members>Payment-Payment Layout</members>
+        <members>PaymentAuthAdjustment-Payment Authorization Adjustment Layout</members>
+        <members>PaymentAuthorization-Payment Authorization Layout</members>
+        <members>PaymentGateway-Payment Gateway Layout</members>
+        <members>PaymentGatewayLog-Payment Gateway Log Layout</members>
+        <members>PaymentGroup-Payment Group Layout</members>
+        <members>PaymentLineInvoice-Payment Line Invoice Layout</members>
+        <members>Pricebook2-Price Book Layout</members>
+        <members>PricebookEntry-Price Book Entry Layout</members>
+        <members>ProcessException-Process Exception Layout</members>
+        <members>Product2-Product Layout</members>
+        <members>ProductConsumptionSchedule-Product Consumption Schedule Layout</members>
+        <members>QuickText-Quick Text Layout</members>
+        <members>Refund-Refund Layout</members>
+        <members>RefundLinePayment-Refund Line Payment Layout</members>
+        <members>ReportAnomalyEventStore-Report Anomaly Event Store Layout</members>
+        <members>Scorecard-Scorecard Layout</members>
+        <members>ScorecardAssociation-Scorecard Association Layout</members>
+        <members>ScorecardMetric-Scorecard Metric Layout</members>
+        <members>Seller-Seller Layout</members>
+        <members>ServiceContract-Service Contract Layout</members>
+        <members>SessionHijackingEventStore-Session Hijacking Event Store Layout</members>
+        <members>SocialPersona-Social Persona Layout</members>
+        <members>Solution-Solution Layout</members>
+        <members>Task-Task Layout</members>
+        <members>ThreatDetectionFeedback-Threat Detection Feedback Layout</members>
+        <members>User-User Layout</members>
+        <members>UserAlt-User Profile Layout</members>
+        <members>UserProvAccount-User Provisioning Account Layout</members>
+        <members>UserProvisioningLog-User Provisioning Log Layout</members>
+        <members>UserProvisioningRequest-User Provisioning Request Layout</members>
+        <members>WorkAccess-Access Layout</members>
+        <members>WorkBadge-Badge Received Layout</members>
+        <members>WorkBadgeDefinition-Badge Layout</members>
+        <members>WorkOrder-Work Order Layout</members>
+        <members>WorkOrderLineItem-Work Order Line Item Layout</members>
+        <members>WorkPlan-Work Plan Layout</members>
+        <members>WorkPlanTemplate-Work Plan Template Layout</members>
+        <members>WorkPlanTemplateEntry-Work Plan Template Entry Layout</members>
+        <members>WorkStep-Work Step Layout</members>
+        <members>WorkStepTemplate-Work Step Template Layout</members>
+        <members>WorkThanks-Thanks Layout</members>
+        <name>Layout</name>
+    </types>
+    <types>
         <members>Account.AllAccounts</members>
         <members>Account.MyAccounts</members>
         <members>Account.NewLastWeek</members>
@@ -281,6 +246,10 @@
         <name>PermissionSet</name>
     </types>
     <types>
+        <members>Read Only</members>
+        <name>Profile</name>
+    </types>
+    <types>
         <members>PT1_profilePasswordPolicy1479361192949</members>
         <name>ProfilePasswordPolicy</name>
     </types>
@@ -312,6 +281,14 @@
         <name>QuickAction</name>
     </types>
     <types>
+        <members>EBotR_v3</members>
+        <members>EBotR_v4</members>
+        <members>EinsteinBotReports</members>
+        <members>EinsteinBotReports_v2</members>
+        <members>unfiled$public/flow_screen_prebuilt_report</members>
+        <name>Report</name>
+    </types>
+    <types>
         <members>screen_flows_prebuilt_crt</members>
         <name>ReportType</name>
     </types>
@@ -339,6 +316,38 @@
     <types>
         <members>trailhead_SAML_SSO_Setting</members>
         <name>SamlSsoConfig</name>
+    </types>
+    <types>
+        <members>Account</members>
+        <members>ActivityRecurrence2</members>
+        <members>ActivityRecurrence2Exception</members>
+        <members>AssistantInteraction</members>
+        <members>AssistantRecommendation</members>
+        <members>CalendarModel</members>
+        <members>CalendarView</members>
+        <members>Case</members>
+        <members>CleanLeadBackup</members>
+        <members>ComponentResponseCache</members>
+        <members>Contact</members>
+        <members>ConvCoachingRecommendation</members>
+        <members>FlowInterview</members>
+        <members>FlowInterviewLog</members>
+        <members>FlowOrchestrationLog</members>
+        <members>FlowOrchestrationStageInstance</members>
+        <members>FlowOrchestrationStepInstance</members>
+        <members>FlowTestResult</members>
+        <members>Lead</members>
+        <members>LearningItem</members>
+        <members>ListEmail</members>
+        <members>NotifDeliveryUserPref</members>
+        <members>Opportunity</members>
+        <members>ReportResultBlob</members>
+        <members>SiqUserBlacklist</members>
+        <members>TodayGoal</members>
+        <members>UserAppMenuCustomization</members>
+        <members>UserEmailPreferredPerson</members>
+        <members>WorkAccess</members>
+        <name>SharingRules</name>
     </types>
     <types>
         <members>AccountContactRole</members>
