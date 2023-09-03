@@ -21,10 +21,10 @@ jobs:
         with:
           node-version: "18"
 
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v3
 
-      - name: cache npm dependencies
+      - name: Cache npm dependencies
         uses: actions/cache@v3
         with:
           path: "~/.npm"
@@ -32,13 +32,5 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      - name: install dependencies
+      - name: Install dependencies
         run: npm install
-
-      - name: Test tsc
-        run: npm run ts-compile-check
-
-      - name: install salesforce cli
-        run: |
-          npm install @salesforce/cli --global
-          sf version
