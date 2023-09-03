@@ -1,10 +1,6 @@
 name: build-ubuntu
 on:
   workflow_call:
-  push:
-    paths:
-      - .github/workflows/build-ubuntu.yml
-      - package-lock.json
 jobs:
   say-hello:
     runs-on: ubuntu-latest

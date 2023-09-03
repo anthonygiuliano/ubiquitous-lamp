@@ -1,0 +1,9 @@
+name: build-ubuntu
+on:
+  workflow_call:
+jobs:
+  say-hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Say hello
+        run: echo hi
