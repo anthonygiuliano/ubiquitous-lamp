@@ -26,7 +26,8 @@ jobs:
     secrets: inherit
   call-validate-diff-to-integration:
     name: Validate git diff to integration org
-    needs: [call-authenticate-to-integration, call-create-delta]
+    needs:
+      [scan-apex-classes, call-authenticate-to-integration, call-create-delta]
     uses: ./.github/workflows/validate-diff-to-integration.yml
     secrets: inherit
   call-cleanup-integration:

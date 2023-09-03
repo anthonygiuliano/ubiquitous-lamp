@@ -8,6 +8,7 @@ on:
 jobs:
   setup-environment:
     runs-on: ubuntu-latest
+    environment: integration
     steps:
       - name: Setup node
         uses: actions/setup-node@v3
