@@ -1,10 +1,17 @@
 name: build-ubuntu
 on:
-  workflow_call:
-    inputs:
-      config-path:
-        required: true
-        type: string
+  push:
+    paths:
+      - force-app/**
+    branches:
+      - hardis/**
+      - dev/**
+      - fix/**
+  # workflow_call:
+  #   inputs:
+  #     config-path:
+  #       required: true
+  #       type: string
 jobs:
   setup-environment:
     runs-on: ubuntu-latest
