@@ -1,0 +1,19 @@
+name: build-ubuntu
+on:
+  workflow_call:
+    inputs:
+      config-path:
+        required: true
+        type: string
+jobs:
+  setup-environment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: 'npm'
+      - name: install salesforce cli
+        run: |
+          npm install @salesforce/cli --global
+          sf version
