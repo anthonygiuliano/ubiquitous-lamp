@@ -20,7 +20,24 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "18"
-          cache: 'npm'
+
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: cache npm dependencies
+        uses: actions/cache@v3
+        with:
+          path: "~/.npm"
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: install dependencies
+        run: npm install
+
+      - name: Test tsc
+        run: npm run ts-compile-check
+
       - name: install salesforce cli
         run: |
           npm install @salesforce/cli --global
