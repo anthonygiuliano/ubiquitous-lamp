@@ -5,34 +5,95 @@ on:
       - force-app/**
       - .github/workflows/push-dev.yml
 jobs:
-  call-build-ubuntu:
-    name: Install dependencies
-    uses: ./.github/workflows/build-ubuntu.yml
-    secrets: inherit
+  setup-node:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+  install-java:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Java
+        run: sudo apt-get update && sudo apt-get install default-jdk
+
+  checkout-repo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+  cache-dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: "~/.npm"
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+  install-dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install dependencies
+        run: npm install
+
+  authenticate-to-integration:
+    name: Authenticate to integration org
+    runs-on: ubuntu-latest
+    environment: integration
+    steps:
+      - name: Populate auth file
+        run: echo ${{secrets.INTEGRATION_URL}} > ./INTEGRATION_URL.txt
+      - name: Authenticate using secret
+        run: sf auth sfdxurl store --sfdx-url-file ./INTEGRATION_URL.txt --alias ag-integration --set-default
+
   scan-apex-classes:
     name: Scan Apex classes
-    needs: call-build-ubuntu
-    uses: ./.github/workflows/scan-apex-classes.yml
-    secrets: inherit
-  call-authenticate-to-integration:
-    name: Authenticate to integration org
-    needs: call-build-ubuntu
-    uses: ./.github/workflows/authenticate-to-integration.yml
-    secrets: inherit
-  call-create-delta:
-    name: Create changed-sources from git diff
-    needs: call-build-ubuntu
-    uses: ./.github/workflows/create-delta.yml
-    secrets: inherit
-  call-validate-diff-to-integration:
-    name: Validate git diff to integration org
-    needs:
-      [scan-apex-classes, call-authenticate-to-integration, call-create-delta]
-    uses: ./.github/workflows/validate-diff-to-integration.yml
-    secrets: inherit
-  call-cleanup-integration:
-    name: Cleanup integration
-    if: ${{ always() }}
-    needs: [call-create-delta, call-validate-diff-to-integration]
-    uses: ./.github/workflows/cleanup-integration.yml
-    secrets: inherit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add changed-sources dir if needed
+        run: mkdir -p changed-sources
+      - name: Scan code
+        run: sf scanner run --format sarif --target 'changed-sources/**/*.cls' --projectdir changed-sources --category 'Design,Best Practices,Performance,Code Style,Security' --outfile changed-sources/apexScanResults.sarif --loglevel DEBUG --verbose
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: changed-sources/apexScanResults.sarif
+
+  create-delta-package:
+    name: Create delta package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create delta package
+        run: |
+          mkdir -p changed-sources
+          sf sgd source delta --to HEAD --from HEAD^ --output changed-sources --generate-delta --source force-app
+
+  validate-diff:
+    name: Validate diff
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deployment dry run with local tests
+        run: |
+          if [ -d changed-sources/force-app ]; then
+            sf project deploy start --source-dir changed-sources/force-app --dry-run --test-level RunLocalTests --json
+          fi
+
+  cleanup:
+    name: Cleanup files and folders
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete auth file
+        run: |
+          if [ -f ./INTEGRATION_URL ]; then
+            rm ./INTEGRATION_URL.txt
+          fi
+      - name: Delete changed-sources dir
+        run: if [ -d changed-sources]; then
+          rm -rf changed-sources
+          fi
