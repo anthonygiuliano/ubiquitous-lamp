@@ -1,0 +1,59 @@
+name: Validate to Integration
+on:
+  push:
+    paths:
+      - force-app/**
+    branches:
+      - hardis/**
+      - dev/**
+      - fix/**
+jobs:
+  validate-to-integration:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    environment: integration
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: 'npm'
+      - name: Checkout source code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Install sf cli
+        run: |
+          wget https://developer.salesforce.com/media/salesforce-cli/sf/channels/stable/sf-linux-x64.tar.xz
+          mkdir -p ~/sf
+          tar xJf sf-linux-x64.tar.xz -C ~/sf --strip-components 1
+          echo "$HOME/sf/bin" >> $GITHUB_PATH
+          ~/sf/bin/sf version
+      - name: Populate auth file with secret of target org
+        run: echo ${{secrets.INTEGRATION_URL}} > ./INTEGRATION_URL.txt
+      - name: Authenticate to target org
+        run: sf auth sfdxurl store --sfdx-url-file ./INTEGRATION_URL.txt --alias ag-integration --set-default
+      - name: Installing sfdx git delta
+        run: |
+          echo y | sf plugins install sfdx-git-delta
+          sf plugins 
+      - name: Create delta packages for new, modified or deleted metadata
+        run: |
+          mkdir changed-sources
+          sf sgd source delta --to "HEAD" --from "HEAD^" --output changed-sources/ --generate-delta --source force-app/ 
+      - name: Installing java
+        run: sudo apt-get update && sudo apt-get install default-jdk
+      - name: Installing SFDX scanner
+        run: sf plugins install @salesforce/sfdx-scanner
+      - name: Scan code
+        run: sf scanner run --format sarif --target "changed-sources/**/*.cls" --projectdir changed-sources --category "Design,Best Practices,Performance,Code Style,Security" --outfile changed-sources/apexScanResults.sarif --loglevel DEBUG --verbose
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: changed-sources/apexScanResults.sarif
+      - name: Deployment - run all tests
+        run: |
+          if [ -d "changed-sources/force-app" ]; then
+            sf project deploy start --source-dir changed-sources/force-app --dry-run --test-level RunLocalTests --json
+          else
+              echo "no changes to deploy"
+          fi
