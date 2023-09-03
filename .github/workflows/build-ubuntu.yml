@@ -8,11 +8,6 @@ on:
       - hardis/**
       - dev/**
       - fix/**
-  # workflow_call:
-  #   inputs:
-  #     config-path:
-  #       required: true
-  #       type: string
 jobs:
   setup-environment:
     runs-on: ubuntu-latest
