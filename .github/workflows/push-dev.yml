@@ -5,9 +5,17 @@ on:
       - force-app/**
       - .github/workflows/push-dev.yml
 jobs:
+  checkout-repo:
+    name: Checkout repo
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
   setup-node:
     name: Setup node
     runs-on: ubuntu-latest
+    needs: checkout-repo
     steps:
       - name: Setup node
         uses: actions/setup-node@v3
@@ -21,17 +29,10 @@ jobs:
       - name: Install Java
         run: sudo apt-get update && sudo apt-get install default-jdk
 
-  checkout-repo:
-    name: Checkout repo
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
   cache-dependencies:
     name: Cache dependencies
     runs-on: ubuntu-latest
-    needs: setup-node
+    needs: [setup-node, install-java]
     steps:
       - name: Cache dependencies
         uses: actions/cache@v3
@@ -44,7 +45,7 @@ jobs:
   install-dependencies:
     name: Install dependencies
     runs-on: ubuntu-latest
-    needs: [cache-dependencies, checkout-repo]
+    needs: cache-dependencies
     steps:
       - name: Install dependencies
         run: npm install
@@ -63,7 +64,7 @@ jobs:
   scan-apex-classes:
     name: Scan Apex classes
     runs-on: ubuntu-latest
-    needs: [checkout-repo, install-dependencies, install-java]
+    needs: authenticate-to-integration
     steps:
       - name: Add changed-sources dir if needed
         run: mkdir -p changed-sources
