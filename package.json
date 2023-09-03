@@ -39,6 +39,12 @@
     ]
   },
   "dependencies": {
-    "@salesforce/cli": "^2.6.7"
+    "@salesforce/cli": "^2.6.7",
+    "@salesforce/plugin-packaging": "1.23.2",
+    "sfdmu": "4.30.0",
+    "sfdx-essentials": "2.12.0",
+    "sfdx-git-delta": "5.25.2",
+    "sfdx-hardis": "4.2.1",
+    "texei-sfdx-plugin": "1.17.3"
   }
 }
