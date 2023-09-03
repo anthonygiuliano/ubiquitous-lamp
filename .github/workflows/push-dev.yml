@@ -10,7 +10,7 @@ jobs:
     secrets: inherit
   scan-apex-classes:
     name: Scan Apex classes
-    uses: ./.github/workflows/scan-apex.classes.yml
+    uses: ./.github/workflows/scan-apex-classes.yml
     secrets: inherit
   call-authenticate-to-integration:
     name: Authenticate to integration org
