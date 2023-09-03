@@ -1,0 +1,14 @@
+name: Validate diff to integration org
+on:
+  workflow_call:
+jobs:
+  validate:
+    name: Validate diff
+    runs-on: ubuntu-latest
+    environment: integration
+    steps:
+      - name: Deployment dry run with local tests
+        run: |
+          if [ -d changed-sources/force-app ]; then
+            sf project deploy start --source-dir changed-sources/force-app --dry-run --test-level RunLocalTests --json
+          fi

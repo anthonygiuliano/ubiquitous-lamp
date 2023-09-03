@@ -1,0 +1,13 @@
+name: Authenticate to integration org
+on:
+  workflow_call:
+jobs:
+  authenticate:
+    name: Authenticate
+    runs-on: ubuntu-latest
+    environment: integration
+    steps:
+      - name: Populate auth file
+        run: echo ${{secrets.INTEGRATION_URL}} > ./INTEGRATION_URL.txt
+      - name: Authenticate using secret
+        run: sf auth sfdxurl store --sfdx-url-file ./INTEGRATION_URL.txt --alias ag-integration --set-default

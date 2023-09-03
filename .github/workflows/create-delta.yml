@@ -1,0 +1,13 @@
+name: Create delta package
+on:
+  workflow_call:
+jobs:
+  create-delta-package:
+    name: Create delta package
+    runs-on: ubuntu-latest
+    environment: integration
+    steps:
+      - name: Create delta package
+        run: |
+          mkdir -p changed-sources
+          sf sgd source delta --to HEAD --from HEAD^ --output changed-sources --generate-delta --source force-app

@@ -1,21 +1,21 @@
 name: build-ubuntu
 on:
+  workflow_call:
   push:
     paths:
-      - force-app/**
       - .github/workflows/build-ubuntu.yml
       - package-lock.json
-    branches:
-      - hardis/**
-      - dev/**
-      - fix/**
 jobs:
   setup-environment:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-node@v3
+      - name: Setup node
+        uses: actions/setup-node@v3
         with:
           node-version: "18"
+
+      - name: Install Java
+        run: sudo apt-get update && sudo apt-get install default-jdk
 
       - name: Checkout
         uses: actions/checkout@v3
