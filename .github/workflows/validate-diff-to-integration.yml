@@ -1,6 +1,9 @@
 name: Validate diff to integration org
 on:
   workflow_call:
+  push:
+    paths:
+      - .github/workflows/validate-diff-to-integration.yml
 jobs:
   validate:
     name: Validate diff

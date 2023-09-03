@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - force-app/**
+      - .github/workflows/push-dev.yml
 jobs:
   call-build-ubuntu:
     name: Install dependencies
@@ -10,21 +11,27 @@ jobs:
     secrets: inherit
   scan-apex-classes:
     name: Scan Apex classes
+    needs: call-build-ubuntu
     uses: ./.github/workflows/scan-apex-classes.yml
     secrets: inherit
   call-authenticate-to-integration:
     name: Authenticate to integration org
+    needs: call-build-ubuntu
     uses: ./.github/workflows/authenticate-to-integration.yml
     secrets: inherit
   call-create-delta:
     name: Create changed-sources from git diff
+    needs: call-build-ubuntu
     uses: ./.github/workflows/create-delta.yml
     secrets: inherit
   call-validate-diff-to-integration:
     name: Validate git diff to integration org
+    needs: [call-authenticate-to-integration, call-create-delta]
     uses: ./.github/workflows/validate-diff-to-integration.yml
     secrets: inherit
   call-cleanup-integration:
     name: Cleanup integration
+    if: ${{ always() }}
+    needs: [call-create-delta, call-validate-diff-to-integration]
     uses: ./.github/workflows/cleanup-integration.yml
     secrets: inherit

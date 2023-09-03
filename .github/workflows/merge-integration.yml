@@ -1,6 +1,9 @@
 name: build-ubuntu
 on:
   workflow_call:
+  push:
+    paths:
+      - .github/workflows/merge-integration.yml
 jobs:
   say-hello:
     runs-on: ubuntu-latest
