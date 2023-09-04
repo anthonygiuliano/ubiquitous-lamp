@@ -5,8 +5,8 @@ on:
       - force-app/**
       - .github/workflows/push-dev.yml
 jobs:
-  setup-environment:
-    name: Setup environment
+  validate-to-integration:
+    name: Validate to integration
     runs-on: unbuntu-latest
     environment: integration
     steps:
