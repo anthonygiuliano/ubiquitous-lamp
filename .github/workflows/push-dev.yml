@@ -5,103 +5,72 @@ on:
       - force-app/**
       - .github/workflows/push-dev.yml
 jobs:
-  checkout-repo:
-    name: Checkout repo
-    runs-on: ubuntu-latest
+  setup-environment:
+    name: Setup environment
+    runs-on: unbuntu-latest
+    environment: integration
     steps:
-      - name: Checkout
+      - name: Checkout repo
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
-  setup-node:
-    name: Setup node
-    runs-on: ubuntu-latest
-    needs: checkout-repo
-    steps:
-      - name: Setup node
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: "microsoft"
+          java-version: "17"
+
+      - name: Use node.js
         uses: actions/setup-node@v3
         with:
           node-version: "18"
 
-  install-java:
-    name: Install Java
-    runs-on: ubuntu-latest
-    steps:
-      - name: Install Java
-        run: sudo apt-get update && sudo apt-get install default-jdk
-
-  install-dependencies:
-    name: Install dependencies
-    runs-on: ubuntu-latest
-    needs: [setup-node, install-java]
-    steps:
-      - name: Cache dependencies
+      - name: Cache node modules
         uses: actions/cache@v3
         with:
-          path: "~/.npm"
+          path: "~/.npm" # npm caches files in ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
+
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
-  authenticate-to-integration:
-    name: Authenticate to integration org
-    runs-on: ubuntu-latest
-    needs: install-dependencies
-    environment: integration
-    steps:
       - name: Populate auth file
-        run: echo ${{secrets.INTEGRATION_URL}} > ./INTEGRATION_URL.txt
-      - name: Authenticate using secret
-        run: sf auth sfdxurl store --sfdx-url-file ./INTEGRATION_URL.txt --alias ag-integration --set-default
+        run: echo ${{secrets.SFDX_URL}} > ./SFDX_URL.txt
 
-  scan-apex-classes:
-    name: Scan Apex classes
-    runs-on: ubuntu-latest
-    needs: authenticate-to-integration
-    steps:
+      - name: Authenticate using secret
+        run: sf auth sfdxurl store --sfdx-url-file ./SFDX_URL.txt --alias ag-target --set-default
+
       - name: Add changed-sources dir if needed
         run: mkdir -p changed-sources
+
       - name: Scan code
         run: sf scanner run --format sarif --target 'changed-sources/**/*.cls' --projectdir changed-sources --category 'Design,Best Practices,Performance,Code Style,Security' --outfile changed-sources/apexScanResults.sarif --loglevel DEBUG --verbose
+
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: changed-sources/apexScanResults.sarif
 
-  create-delta-package:
-    name: Create delta package
-    runs-on: ubuntu-latest
-    needs: scan-apex-classes
-    steps:
       - name: Create delta package
         run: |
           mkdir -p changed-sources
           sf sgd source delta --to HEAD --from HEAD^ --output changed-sources --generate-delta --source force-app
 
-  validate-diff:
-    name: Validate diff
-    runs-on: ubuntu-latest
-    needs: create-delta-package
-    steps:
       - name: Deployment dry run with local tests
         run: |
           if [ -d changed-sources/force-app ]; then
             sf project deploy start --source-dir changed-sources/force-app --dry-run --test-level RunLocalTests --json
           fi
 
-  cleanup:
-    name: Cleanup files and folders
-    runs-on: ubuntu-latest
-    needs: validate-diff
-    steps:
       - name: Delete auth file
         run: |
-          if [ -f ./INTEGRATION_URL ]; then
-            rm ./INTEGRATION_URL.txt
+          if [ -f ./SFDX_URL ]; then
+            rm ./SFDX_URL.txt
           fi
+
       - name: Delete changed-sources dir
         run: if [ -d changed-sources]; then
           rm -rf changed-sources
