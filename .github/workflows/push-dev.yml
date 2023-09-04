@@ -4,7 +4,7 @@ on:
     paths:
       - force-app/**
       - .github/workflows/push-dev.yml
-  workflow_dispatch:
+  workflow_dispatch: # from default branch only
 jobs:
   validate-to-integration:
     name: Validate to integration
