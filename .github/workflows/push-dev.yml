@@ -37,17 +37,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Populate auth file
-        run: echo ${{secrets.SFDX_URL}} > ./SFDX_URL.txt
-
       - name: Authenticate using secret
-        run: sf auth sfdxurl store --sfdx-url-file ./SFDX_URL.txt --alias ag-target --set-default
-
-      - name: Add changed-sources dir if needed
-        run: mkdir -p changed-sources
+        run: |
+          echo ${{secrets.SFDX_URL}} > ./SFDX_URL.txt
+          sf auth sfdxurl store --sfdx-url-file ./SFDX_URL.txt --alias ag-target --set-default
 
       - name: Scan code
-        run: sf scanner run --format sarif --target 'changed-sources/**/*.cls' --projectdir changed-sources --category 'Design,Best Practices,Performance,Code Style,Security' --outfile changed-sources/apexScanResults.sarif --loglevel DEBUG --verbose
+        run: |
+          mkdir -p changed-sources
+          sf scanner run --format sarif --target 'changed-sources/**/*.cls' --projectdir changed-sources --category 'Design,Best Practices,Performance,Code Style,Security' --outfile changed-sources/apexScanResults.sarif --loglevel DEBUG --verbose
 
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v2
