@@ -1,12 +1,77 @@
-name: build-ubuntu
+name: pr-integration
 on:
-  workflow_call:
-  push:
+  pull_request:
+    types:
+      - opened
+      - synchronize
     paths:
-      - .github/workflows/pr-integration.yml
+      - force-app/**
+    branches:
+      - integration
+  workflow_dispatch: # from default branch only
+
 jobs:
-  say-hello:
-    runs-on: ubuntu-latest
+  deploy-to-integration:
+    name: Validate full to integration
+    runs-on: unbuntu-latest
+    environment: integration
     steps:
-      - name: Say hello
-        run: echo hi
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: "microsoft"
+          java-version: "17"
+
+      - name: Use node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: "~/.npm" # npm cache
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Authenticate using secret
+        run: |
+          echo ${{secrets.SFDX_URL}} > ./SFDX_URL.txt
+          sf auth sfdxurl store --sfdx-url-file ./SFDX_URL.txt --alias ag-target --set-default
+
+      - name: Scan code
+        run: |
+          mkdir -p changed-sources
+          sf scanner run --format sarif --target 'changed-sources/**/*.cls' --projectdir changed-sources --category 'Design,Best Practices,Performance,Code Style,Security' --outfile changed-sources/apexScanResults.sarif --loglevel DEBUG --verbose
+
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: changed-sources/apexScanResults.sarif
+
+      - name: Deployment dry run with local tests
+        run: |
+          if [ -d force-app ]; then
+            sf project deploy start --source-dir force-app --dry-run --test-level RunLocalTests --json
+          fi
+
+      - name: Delete auth file
+        run: |
+          if [ -f ./SFDX_URL ]; then
+            rm ./SFDX_URL.txt
+          fi
+
+      - name: Delete changed-sources dir
+        run: |
+          if [ -d changed-sources]; then
+            rm -rf changed-sources
+          fi
