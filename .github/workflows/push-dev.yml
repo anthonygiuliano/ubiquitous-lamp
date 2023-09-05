@@ -40,7 +40,9 @@ jobs:
         run: npm ci
 
       - name: Alias sf
-        run: alias sf='npx sf'
+        run: |
+          alias sf='npx sf'
+          sf version
 
       - name: Use JDK
         uses: actions/setup-java@v2
