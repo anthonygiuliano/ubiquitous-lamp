@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - force-app/**
+      - .github/workflows/validate-to-integration.yml
     branches:
       - hardis/**
       - dev/**
