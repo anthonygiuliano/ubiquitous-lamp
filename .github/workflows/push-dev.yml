@@ -1,4 +1,4 @@
-name: push-dev
+name: Validate diff to integration
 on:
   push:
     paths:
@@ -8,6 +8,7 @@ jobs:
   validate-to-integration:
     name: Validate to integration
     runs-on: unbuntu-latest
+    environment: integration
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
