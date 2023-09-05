@@ -1,14 +1,14 @@
 name: Update npm cache
 on:
   push:
-  paths:
-    - .github/workflows/update-npm-cache.yml
-    - package-lock.json
-  branches:
-    - hardis/**
-    - dev/**
-    - fix/**
-    - integration
+    paths:
+      - .github/workflows/update-npm-cache.yml
+      - package-lock.json
+    branches:
+      - hardis/**
+      - dev/**
+      - fix/**
+      - integration
 jobs:
   update-npm-cache:
     name: Update npm cache
