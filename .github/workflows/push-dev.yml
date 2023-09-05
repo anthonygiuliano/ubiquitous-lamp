@@ -70,6 +70,7 @@ jobs:
           fi
 
       - name: Delete changed-sources dir
-        run: if [ -d changed-sources]; then
-          rm -rf changed-sources
+        run: |
+          if [ -d changed-sources]; then
+            rm -rf changed-sources
           fi
