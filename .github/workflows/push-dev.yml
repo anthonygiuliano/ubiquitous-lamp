@@ -1,4 +1,4 @@
-name: Validate diff to integration
+name: Validate git delta to integration
 on:
   push:
     paths:
@@ -8,6 +8,7 @@ on:
       - hardis/**
       - dev/**
       - fix/**
+  workflow_dispatch:
 jobs:
   validate-to-integration:
     permissions: write-all
