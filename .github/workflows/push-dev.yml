@@ -10,6 +10,7 @@ on:
       - fix/**
 jobs:
   validate-to-integration:
+    permissions: write-all
     name: Validate to integration
     runs-on: unbuntu-latest
     environment: integration
