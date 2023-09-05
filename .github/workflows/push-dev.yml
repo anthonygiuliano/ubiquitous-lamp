@@ -4,6 +4,10 @@ on:
     paths:
       - force-app/**
       - .github/workflows/push-dev.yml
+    branches:
+      - hardis/**
+      - dev/**
+      - fix/**
 jobs:
   validate-to-integration:
     name: Validate to integration
