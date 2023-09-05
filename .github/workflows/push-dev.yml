@@ -12,7 +12,7 @@ jobs:
   validate-to-integration:
     permissions: write-all
     name: Validate to integration
-    runs-on: unbuntu-latest
+    runs-on: ubuntu-latest
     environment: integration
     steps:
       - name: Checkout repo
@@ -20,7 +20,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set up JDK
+      - name: Use JDK
         uses: actions/setup-java@v2
         with:
           distribution: "microsoft"
