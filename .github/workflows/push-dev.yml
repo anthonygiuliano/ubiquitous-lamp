@@ -43,6 +43,7 @@ jobs:
         run: |
           shopt -s expand_aliases
           alias sf='npx sf'
+          sf version
 
       - name: Use JDK
         uses: actions/setup-java@v2
@@ -53,11 +54,15 @@ jobs:
       - name: Authenticate using secret
         run: |
           echo ${{secrets.SFDX_URL}} > ./SFDX_URL.txt
+          shopt -s expand_aliases
+          alias sf='npx sf'
           sf auth sfdxurl store --sfdx-url-file ./SFDX_URL.txt --alias ag-target --set-default
 
       - name: Scan code
         run: |
           mkdir -p changed-sources
+          shopt -s expand_aliases
+          alias sf='npx sf'
           sf scanner run --format sarif --target 'changed-sources/**/*.cls' --projectdir changed-sources --category 'Design,Best Practices,Performance,Code Style,Security' --outfile changed-sources/apexScanResults.sarif --loglevel DEBUG --verbose
 
       - name: Upload SARIF file
@@ -68,11 +73,15 @@ jobs:
       - name: Create delta package
         run: |
           mkdir -p changed-sources
+          shopt -s expand_aliases
+          alias sf='npx sf'
           sf sgd source delta --to HEAD --from HEAD^ --output changed-sources --generate-delta --source force-app
 
       - name: Deployment dry run with local tests
         run: |
           if [ -d changed-sources/force-app ]; then
+            shopt -s expand_aliases
+            alias sf='npx sf'
             sf project deploy start --source-dir changed-sources/force-app --dry-run --test-level RunLocalTests --json
           fi
 
