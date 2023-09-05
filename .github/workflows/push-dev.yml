@@ -41,8 +41,8 @@ jobs:
 
       - name: Alias sf
         run: |
+          shopt -s expand_aliases
           alias sf='npx sf'
-          sf version
 
       - name: Use JDK
         uses: actions/setup-java@v2
