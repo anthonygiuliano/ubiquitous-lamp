@@ -30,9 +30,9 @@ jobs:
           echo "$HOME/sf/bin" >> $GITHUB_PATH
           ~/sf/bin/sf version
       - name: Populate auth file with secret of target org
-        run: echo ${{secrets.INTEGRATION_URL}} > ./INTEGRATION_URL.txt
+        run: echo ${{secrets.SFDX_URL}} > ./SFDX_URL.txt
       - name: Authenticate to target org
-        run: sf auth sfdxurl store --sfdx-url-file ./INTEGRATION_URL.txt --alias ag-integration --set-default
+        run: sf auth sfdxurl store --sfdx-url-file ./SFDX_URL.txt --alias ag-integration --set-default
       - name: Installing sfdx git delta
         run: |
           echo y | sf plugins install sfdx-git-delta
