@@ -46,12 +46,12 @@ jobs:
       - name: Authenticate using secret
         run: |
           echo ${{secrets.SFDX_URL}} > ./SFDX_URL.txt
-          sf auth sfdxurl store --sfdx-url-file ./SFDX_URL.txt --alias ag-target --set-default
+          npx sf auth sfdxurl store --sfdx-url-file ./SFDX_URL.txt --alias ag-target --set-default
 
       - name: Deployment with local tests
         run: |
           if [ -d force-app ]; then
-            sf project deploy start --source-dir force-app --test-level RunLocalTests --json
+            npx sf project deploy start --source-dir force-app --test-level RunLocalTests --json
           fi
 
       - name: Delete auth file
