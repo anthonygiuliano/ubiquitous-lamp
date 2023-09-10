@@ -1,27 +1,25 @@
-name: merge-integration
+name: merge-to-environment-branch
 on:
   pull_request:
     types:
       - closed
     paths:
       - force-app/**
-    branches:
-      - integration
   workflow_dispatch: # from default branch only
 
 jobs:
-  deploy-to-integration:
-    name: Deploy to integration
+  deploy-to-environment:
+    name: Deploy to environment
     runs-on: ubuntu-latest
-    environment: integration
-    if: (github.event_name == 'pull_request' && github.event.pull_request.merged == true) || github.event_name == 'workflow_dispatch'
+    environment: ${{ github.ref_name }}
+    if: (github.ref_name == 'integration' && github.event_name == 'pull_request' && github.event.pull_request.merged == true) || github.event_name == 'workflow_dispatch'
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
-      - name: Set up JDK
+      - name: Use JDK
         uses: actions/setup-java@v2
         with:
           distribution: "microsoft"
