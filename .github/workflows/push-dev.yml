@@ -1,0 +1,80 @@
+name: Validate git delta to integration
+on:
+  push:
+    paths:
+      - force-app/**
+      - .github/workflows/push-dev.yml
+    branches:
+      - hardis/**
+      - dev/**
+      - fix/**
+  workflow_dispatch:
+jobs:
+  validate-to-integration:
+    permissions: write-all
+    name: Validate to integration
+    runs-on: ubuntu-latest
+    environment: integration
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: "npm"
+
+      - uses: actions/cache@v3
+        with:
+          path: "~/.npm" # npm cache
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - uses: actions/setup-java@v3
+        with:
+          distribution: "microsoft"
+          java-version: "17"
+          check-latest: true
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Authenticate using secret
+        run: |
+          echo ${{secrets.SFDX_URL}} > ./SFDX_URL.txt
+          npx sf auth sfdxurl store --sfdx-url-file ./SFDX_URL.txt --alias ag-target --set-default
+
+      - name: Scan code
+        run: |
+          mkdir -p changed-sources
+          npx sf scanner run --format sarif --target 'changed-sources/**/*.cls' --projectdir changed-sources --category 'Design,Best Practices,Performance,Code Style,Security' --outfile changed-sources/apexScanResults.sarif --loglevel DEBUG --verbose
+
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: changed-sources/apexScanResults.sarif
+
+      - name: Create delta package
+        run: |
+          mkdir -p changed-sources
+          npx sf sgd source delta --to HEAD --from HEAD^ --output changed-sources --generate-delta --source force-app
+
+      - name: Deployment dry run with local tests
+        run: |
+          if [ -d changed-sources/force-app ]; then
+            npx sf project deploy start --source-dir changed-sources/force-app --dry-run --test-level RunLocalTests --json
+          fi
+
+      - name: Delete auth file
+        run: |
+          if [ -f ./SFDX_URL ]; then
+            rm ./SFDX_URL.txt
+          fi
+
+      - name: Delete changed-sources dir
+        run: |
+          if [ -d changed-sources]; then
+            rm -rf changed-sources
+          fi

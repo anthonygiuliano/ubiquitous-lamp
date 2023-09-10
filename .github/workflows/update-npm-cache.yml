@@ -1,0 +1,40 @@
+name: Update npm cache
+on:
+  push:
+    paths:
+      - .github/workflows/update-npm-cache.yml
+      - package-lock.json
+    branches:
+      - hardis/**
+      - dev/**
+      - fix/**
+      - integration
+jobs:
+  update-npm-cache:
+    name: Update npm cache
+    permissions: write-all
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Use JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: "microsoft"
+          java-version: "17"
+
+      - name: Use node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: "~/.npm" # npm cache
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
