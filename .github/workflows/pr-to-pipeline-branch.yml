@@ -57,15 +57,3 @@ jobs:
           if [ -d force-app ]; then
             npx sf project deploy start --source-dir force-app --dry-run --test-level RunLocalTests --json
           fi
-
-      - name: Delete auth file
-        run: |
-          if [ -f ./SFDX_URL ]; then
-            rm ./SFDX_URL.txt
-          fi
-
-      - name: Delete changed-sources dir
-        run: |
-          if [ -d changed-sources]; then
-            rm -rf changed-sources
-          fi
