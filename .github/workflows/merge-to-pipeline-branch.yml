@@ -19,6 +19,9 @@ jobs:
     environment: ${{ github.ref_name }}
     if: (github.event_name == 'pull_request' && github.event.pull_request.merged == true) || github.event_name == 'workflow_dispatch'
     steps:
+      - name: Print ref_name
+        run: echo ${{ github.ref_name }}
+
       - name: Checkout repo
         uses: actions/checkout@v3
         with:
