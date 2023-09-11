@@ -5,6 +5,8 @@ on:
     paths:
       - .github/workflows/update-npm-cache.yml
       - package-lock.json
+    paths-ignore:
+      - force-app/**
     branches:
       - hardis/**
       - dev/**
