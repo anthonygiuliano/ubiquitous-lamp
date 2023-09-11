@@ -16,24 +16,25 @@
     "precommit": "lint-staged"
   },
   "devDependencies": {
-    "@lwc/eslint-plugin-lwc": "latest",
-    "@prettier/plugin-xml": "latest",
-    "@salesforce/eslint-config-lwc": "latest",
-    "@salesforce/eslint-plugin-aura": "latest",
-    "@salesforce/eslint-plugin-lightning": "latest",
-    "@salesforce/plugin-packaging": "latest",
-    "@salesforce/sfdx-lwc-jest": "latest",
-    "@salesforce/sfdx-scanner": "latest",
-    "eslint": "latest",
-    "eslint-config-standard": "latest",
-    "eslint-plugin-import": "latest",
-    "eslint-plugin-jest": "latest",
-    "eslint-plugin-n": "latest",
-    "eslint-plugin-promise": "latest",
-    "husky": "latest",
-    "lint-staged": "latest",
-    "prettier": "latest",
-    "prettier-plugin-apex": "latest"
+    "@lwc/eslint-plugin-lwc": "^1.1.2",
+    "@prettier/plugin-xml": "^2.2.0",
+    "@salesforce/eslint-config-lwc": "^3.2.3",
+    "@salesforce/eslint-plugin-aura": "^2.0.0",
+    "@salesforce/eslint-plugin-lightning": "^1.0.0",
+    "@salesforce/plugin-packaging": "^1.24.0",
+    "@salesforce/sfdx-lwc-jest": "^1.1.0",
+    "@salesforce/sfdx-scanner": "^3.16.0",
+    "eslint": "^8.11.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jest": "^26.1.2",
+    "eslint-plugin-n": "^16.1.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.7",
+    "minimatch": "^9.0.3",
+    "prettier": "^2.8.8",
+    "prettier-plugin-apex": "^1.10.0"
   },
   "lint-staged": {
     "**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}": [
@@ -44,13 +45,12 @@
     ]
   },
   "dependencies": {
-    "@salesforce/cli": "latest",
-    "@salesforce/plugin-packaging": "latest",
-    "npx": "latest",
-    "sfdmu": "latest",
-    "sfdx-essentials": "latest",
-    "sfdx-git-delta": "latest",
-    "sfdx-hardis": "latest",
-    "texei-sfdx-plugin": "latest"
+    "@salesforce/cli": "^2.7.11",
+    "npx": "^10.2.2",
+    "sfdmu": "4.30.0",
+    "sfdx-essentials": "2.12.0",
+    "sfdx-git-delta": "5.25.2",
+    "sfdx-hardis": "4.2.1",
+    "texei-sfdx-plugin": "1.17.3"
   }
 }
