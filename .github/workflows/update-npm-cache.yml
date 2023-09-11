@@ -1,5 +1,6 @@
-name: Update npm cache
+name: update-npm-cache
 on:
+  workflow_dispatch:
   push:
     paths:
       - .github/workflows/update-npm-cache.yml
@@ -8,7 +9,7 @@ on:
       - hardis/**
       - dev/**
       - fix/**
-      - integration
+
 jobs:
   update-npm-cache:
     name: Update npm cache
