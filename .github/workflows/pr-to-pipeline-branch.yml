@@ -17,10 +17,10 @@ jobs:
     name: Dry run - project to env
     permissions: write-all
     runs-on: ubuntu-latest
-    environment: ${{ github.ref_name }}
+    environment: ${{ github.base_ref }}
     steps:
       - name: Print ref_name
-        run: echo ${{ github.ref_name }}
+        run: echo ${{ github.base_ref }}
 
       - name: Checkout repo
         uses: actions/checkout@v3
