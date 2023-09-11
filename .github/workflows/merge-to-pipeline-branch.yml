@@ -1,20 +1,19 @@
-name: pr-to-environment-branch
+name: merge-to-pipeline-branch
 on:
+  workflow_dispatch:
   pull_request:
     types:
-      - opened
-      - synchronize
+      - closed
     paths:
       - force-app/**
-    branches:
-      - integration
-  workflow_dispatch: # from default branch only
 
 jobs:
-  deploy-to-environment:
-    name: Validate full to environment
+  deploy-project-to-env:
+    name: Deploy project to env
+    permissions: write-all
     runs-on: ubuntu-latest
     environment: ${{ github.ref_name }}
+    if: (github.event_name == 'pull_request' && github.event.pull_request.merged == true) || github.event_name == 'workflow_dispatch'
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
@@ -48,20 +47,10 @@ jobs:
           echo ${{secrets.SFDX_URL}} > ./SFDX_URL.txt
           npx sf auth sfdxurl store --sfdx-url-file ./SFDX_URL.txt --alias ag-target --set-default
 
-      - name: Scan code
-        run: |
-          mkdir -p changed-sources
-          npx sf scanner run --format sarif --target 'changed-sources/**/*.cls' --projectdir changed-sources --category 'Design,Best Practices,Performance,Code Style,Security' --outfile changed-sources/apexScanResults.sarif --loglevel DEBUG --verbose
-
-      - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: changed-sources/apexScanResults.sarif
-
-      - name: Deployment dry run with local tests
+      - name: Deployment with local tests
         run: |
           if [ -d force-app ]; then
-            npx sf project deploy start --source-dir force-app --dry-run --test-level RunLocalTests --json
+            npx sf project deploy start --source-dir force-app --test-level RunLocalTests --json
           fi
 
       - name: Delete auth file

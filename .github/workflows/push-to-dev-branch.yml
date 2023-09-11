@@ -1,18 +1,19 @@
-name: push-to-development-branch
+name: push-to-dev-branch
 on:
+  workflow_dispatch:
   push:
     paths:
       - force-app/**
-      - .github/workflows/push-to-development-branch.yml
+      - .github/workflows/push-to-dev-branch.yml
     branches:
       - hardis/**
       - dev/**
       - fix/**
-  workflow_dispatch:
+
 jobs:
-  validate-to-integration:
+  dry-run-delta-to-integration:
+    name: Dry run - delta to integration
     permissions: write-all
-    name: Validate to integration
     runs-on: ubuntu-latest
     environment: integration
     steps:
