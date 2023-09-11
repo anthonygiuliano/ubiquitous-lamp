@@ -1,9 +1,9 @@
-name: Validate git delta to integration
+name: push-to-development-branch
 on:
   push:
     paths:
       - force-app/**
-      - .github/workflows/push-dev.yml
+      - .github/workflows/push-to-development-branch.yml
     branches:
       - hardis/**
       - dev/**

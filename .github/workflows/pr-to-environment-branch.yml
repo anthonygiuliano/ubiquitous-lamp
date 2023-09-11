@@ -1,4 +1,4 @@
-name: pr-integration
+name: pr-to-environment-branch
 on:
   pull_request:
     types:
@@ -11,17 +11,17 @@ on:
   workflow_dispatch: # from default branch only
 
 jobs:
-  deploy-to-integration:
-    name: Validate full to integration
+  deploy-to-environment:
+    name: Validate full to environment
     runs-on: ubuntu-latest
-    environment: integration
+    environment: ${{ github.ref_name }}
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
-      - name: Set up JDK
+      - name: Use JDK
         uses: actions/setup-java@v2
         with:
           distribution: "microsoft"
