@@ -16,7 +16,7 @@ jobs:
     name: Deploy project to env
     permissions: write-all
     runs-on: ubuntu-latest
-    environment: ${{ github.ref_name }}
+    environment: ${{ github.head_ref }}
     if: (github.event_name == 'pull_request' && github.event.pull_request.merged == true) || github.event_name == 'workflow_dispatch'
     steps:
       - name: Checkout repo
