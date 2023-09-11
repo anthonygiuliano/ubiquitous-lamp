@@ -17,8 +17,11 @@ jobs:
     name: Dry run - project to env
     permissions: write-all
     runs-on: ubuntu-latest
-    environment: ${{ github.ref_name }}
+    environment: ${{ github.base_ref }}
     steps:
+      - name: Print ref_name
+        run: echo ${{ github.base_ref }}
+
       - name: Checkout repo
         uses: actions/checkout@v3
         with:
@@ -55,16 +58,4 @@ jobs:
         run: |
           if [ -d force-app ]; then
             npx sf project deploy start --source-dir force-app --dry-run --test-level RunLocalTests --json
-          fi
-
-      - name: Delete auth file
-        run: |
-          if [ -f ./SFDX_URL ]; then
-            rm ./SFDX_URL.txt
-          fi
-
-      - name: Delete changed-sources dir
-        run: |
-          if [ -d changed-sources]; then
-            rm -rf changed-sources
           fi
