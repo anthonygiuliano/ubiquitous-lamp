@@ -5,6 +5,9 @@
 **/staticresources/**
 .localdevserver
 .sfdx
+.sf
 .vscode
+package.json
+package-lock.json
 
 coverage/
