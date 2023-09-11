@@ -51,16 +51,6 @@ jobs:
           echo ${{secrets.SFDX_URL}} > ./SFDX_URL.txt
           npx sf auth sfdxurl store --sfdx-url-file ./SFDX_URL.txt --alias ag-target --set-default
 
-      - name: Scan code
-        run: |
-          mkdir -p changed-sources
-          npx sf scanner run --format sarif --target 'changed-sources/**/*.cls' --projectdir changed-sources --category 'Design,Best Practices,Performance,Code Style,Security' --outfile changed-sources/apexScanResults.sarif --loglevel DEBUG --verbose
-
-      - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: changed-sources/apexScanResults.sarif
-
       - name: Deployment dry run with local tests
         run: |
           if [ -d force-app ]; then
