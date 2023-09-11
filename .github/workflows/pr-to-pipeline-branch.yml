@@ -17,8 +17,7 @@ jobs:
     name: Dry run - project to env
     permissions: write-all
     runs-on: ubuntu-latest
-    environment: ${{ github.head_ref }}
-    if: contains(fromJSON('["integration", "uat", "pre-prod"]'), github.head_ref)
+    environment: ${{ github.ref_name }}
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
