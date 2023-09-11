@@ -1,4 +1,4 @@
-name: Update npm cache
+name: update-npm-cache
 on:
   workflow_dispatch:
   push:
@@ -9,7 +9,6 @@ on:
       - hardis/**
       - dev/**
       - fix/**
-      - integration
 
 jobs:
   update-npm-cache:
