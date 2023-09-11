@@ -15,6 +15,7 @@ on:
 jobs:
   dry-run-project-to-env:
     name: Dry run - project to env
+    if: contains(fromJSON('["integration", "uat", "pre-prod"]'), github.head_ref)
     permissions: write-all
     runs-on: ubuntu-latest
     environment: ${{ github.ref_name }}
