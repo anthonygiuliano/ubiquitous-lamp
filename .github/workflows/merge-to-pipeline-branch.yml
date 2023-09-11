@@ -6,6 +6,10 @@ on:
       - closed
     paths:
       - force-app/**
+    branches:
+      - integration
+      - uat
+      - pre-prod
 
 jobs:
   deploy-project-to-env:
