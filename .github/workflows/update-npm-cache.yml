@@ -2,11 +2,9 @@ name: update-npm-cache
 on:
   workflow_dispatch:
   push:
-    paths:
-      - .github/workflows/update-npm-cache.yml
-      - package-lock.json
     paths-ignore:
       - force-app/**
+      - manifest/**
     branches:
       - hardis/**
       - dev/**
