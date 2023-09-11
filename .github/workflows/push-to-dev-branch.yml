@@ -4,7 +4,6 @@ on:
   push:
     paths:
       - force-app/**
-      - .github/workflows/push-to-dev-branch.yml
     branches:
       - hardis/**
       - dev/**
