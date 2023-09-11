@@ -16,20 +16,24 @@
     "precommit": "lint-staged"
   },
   "devDependencies": {
-    "@lwc/eslint-plugin-lwc": "^1.1.2",
-    "@prettier/plugin-xml": "^2.0.1",
-    "@salesforce/eslint-config-lwc": "^3.2.3",
-    "@salesforce/eslint-plugin-aura": "^2.0.0",
-    "@salesforce/eslint-plugin-lightning": "^1.0.0",
-    "@salesforce/sfdx-lwc-jest": "^1.1.0",
-    "@salesforce/sfdx-scanner": "3.16.0",
-    "eslint": "^8.11.0",
-    "eslint-plugin-import": "^2.25.4",
-    "eslint-plugin-jest": "^26.1.2",
-    "husky": "^7.0.4",
-    "lint-staged": "^12.3.7",
-    "prettier": "^2.6.0",
-    "prettier-plugin-apex": "^1.10.0"
+    "@lwc/eslint-plugin-lwc": "latest",
+    "@prettier/plugin-xml": "latest",
+    "@salesforce/eslint-config-lwc": "latest",
+    "@salesforce/eslint-plugin-aura": "latest",
+    "@salesforce/eslint-plugin-lightning": "latest",
+    "@salesforce/plugin-packaging": "latest",
+    "@salesforce/sfdx-lwc-jest": "latest",
+    "@salesforce/sfdx-scanner": "latest",
+    "eslint": "latest",
+    "eslint-config-standard": "latest",
+    "eslint-plugin-import": "latest",
+    "eslint-plugin-jest": "latest",
+    "eslint-plugin-n": "latest",
+    "eslint-plugin-promise": "latest",
+    "husky": "latest",
+    "lint-staged": "latest",
+    "prettier": "latest",
+    "prettier-plugin-apex": "latest"
   },
   "lint-staged": {
     "**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}": [
@@ -40,13 +44,13 @@
     ]
   },
   "dependencies": {
-    "@salesforce/cli": "^2.6.7",
-    "@salesforce/plugin-packaging": "1.23.2",
-    "npx": "^10.2.2",
-    "sfdmu": "4.30.0",
-    "sfdx-essentials": "2.12.0",
-    "sfdx-git-delta": "5.25.2",
-    "sfdx-hardis": "4.2.1",
-    "texei-sfdx-plugin": "1.17.3"
+    "@salesforce/cli": "latest",
+    "@salesforce/plugin-packaging": "latest",
+    "npx": "latest",
+    "sfdmu": "latest",
+    "sfdx-essentials": "latest",
+    "sfdx-git-delta": "latest",
+    "sfdx-hardis": "latest",
+    "texei-sfdx-plugin": "latest"
   }
 }
