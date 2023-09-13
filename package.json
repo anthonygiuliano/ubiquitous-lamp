@@ -30,6 +30,7 @@
     "@salesforce/plugin-packaging": "^1.25.0",
     "eslint": "^8.49.0",
     "husky": "^8.0.3",
+    "node-jq": "^4.0.1",
     "prettier": "^3.0.3",
     "prettier-plugin-apex": "^2.0.1",
     "sfdmu": "^4.30.0",
