@@ -8,5 +8,18 @@
   "name": "UbiquitousLamp",
   "namespace": "",
   "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "58.0"
+  "sourceApiVersion": "58.0",
+  "replacements": [
+    {
+      "filename": "force-app/*",
+      "stringToReplace": "SOMETHING ELSE",
+      "replaceWithEnv": "TARGET_USERNAME",
+      "replaceWhenEnv": [
+        {
+          "env": "TARGET_ENV",
+          "value": "integration"
+        }
+      ]
+    }
+  ]
 }
