@@ -28,6 +28,7 @@
     "@salesforce/cli": "^2.7.11",
     "@salesforce/eslint-config-lwc": "^3.5.2",
     "@salesforce/plugin-packaging": "^1.25.0",
+    "@salesforce/sfdx-scanner": "^3.16.0",
     "eslint": "^8.49.0",
     "husky": "^8.0.3",
     "node-jq": "^4.0.1",
