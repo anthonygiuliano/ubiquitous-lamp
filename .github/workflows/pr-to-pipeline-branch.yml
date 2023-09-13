@@ -11,6 +11,8 @@ on:
       - integration
       - uat
       - pre-prod
+env:
+  SFDX_ENV: ${{ github.base_ref }}
 
 jobs:
   dry-run-project-to-env:
@@ -19,9 +21,6 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ github.base_ref }}
     steps:
-      - name: Print ref_name
-        run: echo ${{ github.base_ref }}
-
       - name: Checkout repo
         uses: actions/checkout@v3
         with:
@@ -50,12 +49,10 @@ jobs:
         run: npm ci
 
       - name: Authenticate using secret
-        run: |
-          echo ${{secrets.SFDX_URL}} > ./SFDX_URL.txt
+        run: echo ${{secrets.SFDX_URL}} > ./SFDX_URL.txt
           npx sf auth sfdxurl store --sfdx-url-file ./SFDX_URL.txt --alias ag-target --set-default
 
       - name: Deployment dry run with local tests
-        run: |
-          if [ -d force-app ]; then
-            npx sf project deploy start --source-dir force-app --dry-run --test-level RunLocalTests --json
+        run: if [ -d force-app ]; then
+          npx sf project deploy start --source-dir force-app --dry-run --test-level RunLocalTests --json
           fi
