@@ -46,10 +46,12 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci
 
       - name: Authenticate using secret
-        run: echo ${{secrets.SFDX_URL}} > ./SFDX_URL.txt
+        run: |
+          echo ${{secrets.SFDX_URL}} > ./SFDX_URL.txt
           npx sf auth sfdxurl store --sfdx-url-file ./SFDX_URL.txt --alias ag-target --set-default
 
       - name: Deployment dry run with local tests
