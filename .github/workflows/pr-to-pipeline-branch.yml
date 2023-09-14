@@ -53,6 +53,7 @@ jobs:
           npx sf auth sfdxurl store --sfdx-url-file ./SFDX_URL.txt --alias ag-target --set-default
 
       - name: Deployment dry run with local tests
-        run: if [ -d force-app ]; then
-          npx sf project deploy start --source-dir force-app --dry-run --test-level RunLocalTests --json
+        run: |
+          if [ -d force-app ]; then
+            npx sf project deploy start --source-dir force-app --dry-run --test-level RunLocalTests --json
           fi
