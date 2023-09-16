@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@prettier/plugin-xml": "^3.2.1",
-    "@salesforce/cli": "^2.7.11",
+    "@salesforce/cli": "^2.8.11",
     "@salesforce/eslint-config-lwc": "^3.5.2",
     "@salesforce/plugin-packaging": "^1.25.0",
     "@salesforce/sfdx-scanner": "^3.16.0",
