@@ -45,3 +45,5 @@ tmp/
 **/data/**/source/**
 **/data/**/target/**
 force-app/main/default/appMenus/AppSwitcher.appMenu-meta.xml
+# Workspaces
+*.code-workspace
