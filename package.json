@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@prettier/plugin-xml": "^3.2.1",
-    "@salesforce/cli": "^2.9.8",
+    "@salesforce/cli": "^2.10.2",
     "@salesforce/eslint-config-lwc": "^3.5.2",
     "@salesforce/plugin-packaging": "^1.26.1",
     "@salesforce/sfdx-scanner": "^3.16.0",
@@ -37,8 +37,8 @@
     "prettier-plugin-apex": "^2.0.1",
     "sfdmu": "^4.30.0",
     "sfdx-essentials": "^2.12.0",
-    "sfdx-git-delta": "^5.25.2",
-    "sfdx-hardis": "^4.6.0",
-    "texei-sfdx-plugin": "^1.17.3"
+    "sfdx-git-delta": "^5.26.0",
+    "sfdx-hardis": "^4.6.2",
+    "texei-sfdx-plugin": "^2.1.1"
   }
 }
