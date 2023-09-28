@@ -1,28 +1,41 @@
 {
-  "objects": [
+  "objectSets": [
     {
-      "query": "SELECT Id, Name, RecordTypeId, OwnerId, readonly_false FROM Account ORDER BY CreatedDate DESC LIMIT 100",
-      "operation": "Upsert",
-      "externalId": "Name",
-      "useFieldMapping": false,
-      "fieldMapping": [
+      "objects": [
         {
-          "targetObject": "Account"
+          "query": "SELECT Id, Name, RecordTypeId, OwnerId, readonly_false FROM Account ORDER BY CreatedDate DESC LIMIT 100",
+          "operation": "Upsert",
+          "externalId": "Name",
+          "useFieldMapping": false,
+          "fieldMapping": [
+            {
+              "targetObject": "Account"
+            },
+            {
+              "sourceField": "Street",
+              "targetField": "Street"
+            },
+            {
+              "sourceField": "City",
+              "targetField": "City"
+            }
+          ]
         },
         {
-          "sourceField": "Street",
-          "targetField": "Street"
-        },
-        {
-          "sourceField": "City",
-          "targetField": "City"
+          "query": "SELECT Id, Name, RecordTypeId, OwnerId, readonly_false FROM Opportunity ORDER BY CreatedDate DESC LIMIT 100",
+          "operation": "Upsert",
+          "externalId": "Name"
         }
       ]
     },
     {
-      "query": "SELECT Id, Name, RecordTypeId, OwnerId, readonly_false FROM Opportunity ORDER BY CreatedDate DESC LIMIT 100",
-      "operation": "Upsert",
-      "externalId": "Name"
+      "objects": [
+        {
+          "query": "SELECT Id, Name, RecordTypeId, OwnerId, readonly_false FROM Account ORDER BY CreatedDate DESC LIMIT 1",
+          "operation": "Upsert",
+          "externalId": "Name"
+        }
+      ]
     }
   ]
 }
