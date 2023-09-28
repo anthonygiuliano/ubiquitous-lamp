@@ -5,7 +5,7 @@
       "operation": "Upsert",
       "externalId": "Name",
       "useFieldMapping": false,
-      "useFieldMapping": [
+      "fieldMapping": [
         {
           "targetObject": "Account"
         },
