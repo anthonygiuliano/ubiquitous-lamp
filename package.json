@@ -27,7 +27,7 @@
     "@prettier/plugin-xml": "^3.2.1",
     "@salesforce/cli": "^2.10.2",
     "@salesforce/eslint-config-lwc": "^3.5.2",
-    "@salesforce/plugin-packaging": "^1.26.1",
+    "@salesforce/plugin-packaging": "^1.26.3",
     "@salesforce/sfdx-scanner": "^3.16.0",
     "eslint": "^8.50.0",
     "husky": "^8.0.3",
@@ -38,7 +38,7 @@
     "sfdmu": "^4.30.0",
     "sfdx-essentials": "^2.12.0",
     "sfdx-git-delta": "^5.26.0",
-    "sfdx-hardis": "^4.6.2",
-    "texei-sfdx-plugin": "^2.1.1"
+    "sfdx-hardis": "^4.6.4",
+    "texei-sfdx-plugin": "^2.1.2"
   }
 }
