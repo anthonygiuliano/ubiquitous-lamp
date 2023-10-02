@@ -1,0 +1,37 @@
+{
+  "dev": {
+    "alias": "ag.dev",
+    "username": "agiuliano@mindful-hawk-sf7jkz.com",
+    "orgId": "00DHs000001wRSOMA2",
+    "instanceUrl": "https://ag-dev-230912-dev-ed.trailblaze.my.salesforce.com",
+    "usernameSuffix": "dev"
+  },
+  "integration": {
+    "alias": "ag.integration",
+    "username": "agiuliano@resilient-hawk-2xyvby.com",
+    "orgId": "00D8b0000038joGEAQ",
+    "instanceUrl": "https://ag-integration-230901-dev-ed.trailblaze.my.salesforce.com",
+    "usernameSuffix": "integration"
+  },
+  "uat": {
+    "alias": "ag.uat",
+    "username": "agiuliano@resilient-raccoon-2evij2.com",
+    "orgId": "00D8b0000038joQEAQ",
+    "instanceUrl": "https://ag-uat-230901-dev-ed.trailblaze.my.salesforce.com",
+    "usernameSuffix": "uat"
+  },
+  "preprod": {
+    "alias": "ag.preprod",
+    "username": "agiuliano@creative-panda-kbkazv.com",
+    "orgId": "00D8b0000038jofEAA",
+    "instanceUrl": "https://ag-pre-prod-230901-dev-ed.trailblaze.my.salesforce.com",
+    "usernameSuffix": "preprod"
+  },
+  "prod": {
+    "alias": "ag.prod",
+    "username": "agiuliano@resourceful-wolf-ma8qhs.com",
+    "orgId": "00D8b0000038jnXEAQ",
+    "instanceUrl": "https://ag-prod-230901-dev-ed.trailblaze.my.salesforce.com",
+    "usernameSuffix": "prod"
+  }
+}
