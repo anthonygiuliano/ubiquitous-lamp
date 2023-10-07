@@ -67,7 +67,6 @@ split_cols.columns = [f'Username_Domain_{i}' for i in range(len(split_cols.colum
 users_df = pd.concat([users_df, split_cols], axis=1)
 
 # Get the absolute path to the directory containing the script
-from typing import Any
 script_dir: str = os.path.dirname(p=os.path.abspath(path=__file__))
 
 # Construct the absolute path to the force-app directory
@@ -109,3 +108,11 @@ for xml_path in xml_paths:
 			print(f'root.tag: {root.tag}')
 			print(f'elem.attrib: {elem.attrib}')
 			print(f'elem.tag: {elem.tag}')
+
+			# Determine if the value is an email address or a username
+			#! TODO
+			# Replace the username with the new username
+			elem.text = elem_text.replace(username_name, username_new)
+
+			# Write the updated XML file to disk
+			tree.write(file_or_filename=xml_path)
