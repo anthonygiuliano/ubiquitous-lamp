@@ -117,7 +117,7 @@ for xml_path in xml_paths:
 
 			# Determine if the value is an email address or a username
 			#! TODO
-			#? If value.split(sep='.')[0:-1] in [username.split(sep='.')[0:-1] for username in usernames]?
+			#? If value.split(sep='.')[:-1] in [username.split(sep='.')[:-1] for username in usernames]?
 			#? Else replace with email?
 			# Replace the username with the new username
 			# elem.text = elem_text.replace(username_name, username_new)
