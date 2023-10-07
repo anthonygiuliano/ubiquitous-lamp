@@ -82,6 +82,12 @@ for root_path, dirs, files in os.walk(top=metadata_dir):
 # Regex pattern to match email addresses in xml nodes
 pattern_email: re.Pattern[str] = re.compile(pattern=r'(?P<username_name>[^@]+)@[^@]+\.[^@]+')
 
+# Usernames from target org
+usernames: list[str] = users_df['Username'].tolist()
+
+# Emails from target org
+emails: list[str] = users_df['Email'].tolist()
+
 # Process each XML file
 for xml_path in xml_paths:
 	# Parse the XML file
@@ -111,8 +117,10 @@ for xml_path in xml_paths:
 
 			# Determine if the value is an email address or a username
 			#! TODO
+			#? If value.split(sep='.')[0:-1] in [username.split(sep='.')[0:-1] for username in usernames]?
+			#? Else replace with email?
 			# Replace the username with the new username
-			elem.text = elem_text.replace(username_name, username_new)
+			# elem.text = elem_text.replace(username_name, username_new)
 
 			# Write the updated XML file to disk
-			tree.write(file_or_filename=xml_path)
+			# tree.write(file_or_filename=xml_path)
