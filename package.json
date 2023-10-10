@@ -37,7 +37,7 @@
     "prettier-plugin-apex": "^2.0.1",
     "sfdmu": "^4.30.0",
     "sfdx-essentials": "^2.12.0",
-    "sfdx-git-delta": "^5.26.1",
+    "sfdx-git-delta": "^5.26.2",
     "sfdx-hardis": "^4.6.4",
     "texei-sfdx-plugin": "^2.1.2"
   }

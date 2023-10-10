@@ -1,3 +1,12 @@
-# Extend from shared sfdx-hardis Mega-Linter configuration :)
-EXTENDS:
-  - https://raw.githubusercontent.com/hardisgroupcom/sfdx-hardis/main/config/sfdx-hardis.mega-linter-config.yml
+# Configuration file for Mega-Linter
+# See all available variables at https://nvuillam.github.io/mega-linter/configuration/ and in linters documentation
+
+APPLY_FIXES: all # all, none, or list of linter keys
+DEFAULT_BRANCH: integration # Usually master or main
+# ENABLE: # If you use ENABLE variable, all other languages/formats/tooling-formats will be disabled by default
+# ENABLE_LINTERS: # If you use ENABLE_LINTERS variable, all other linters will be disabled by default
+# DISABLE:
+# - COPYPASTE # Uncomment to disable checks of abusive copy-pastes
+# - SPELL # Uncomment to disable checks of spelling mistakes
+SHOW_ELAPSED_TIME: true
+FILEIO_REPORTER: false
