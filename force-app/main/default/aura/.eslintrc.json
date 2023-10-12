@@ -1,8 +1,15 @@
 {
+  "env": {
+    "browser": true
+  },
+
   "plugins": ["@salesforce/eslint-plugin-aura"],
   "extends": ["plugin:@salesforce/eslint-plugin-aura/recommended"],
+
   "rules": {
-    "vars-on-top": "off",
-    "no-unused-expressions": "off"
+    "strict": 0,
+    "no-unused-expressions": 0,
+    "quotes": [2, "double", { "avoidEscape": true }],
+    "quote-props": [2, "consistent-as-needed"]
   }
 }

@@ -33,7 +33,7 @@
       }
     },
     {
-      "files": "{.*rc, *.xml}",
+      "files": "*.xml",
       "options": {
         "bracketSameLine": true
       }

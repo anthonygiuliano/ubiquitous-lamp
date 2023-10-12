@@ -4,7 +4,7 @@
     "es2021": true,
     "node": true
   },
-  "extends": "@salesforce/eslint-config-lwc/extended",
+  "extends": "@salesforce/eslint-config-lwc/recommended",
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module"
