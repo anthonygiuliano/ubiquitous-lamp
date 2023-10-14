@@ -54,8 +54,13 @@ jobs:
           echo ${{secrets.SFDX_URL}} > ./SFDX_URL.txt
           npx sf auth sfdxurl store --sfdx-url-file ./SFDX_URL.txt --alias ag-target --set-default
 
+      - name: Create tmp dir
+        run: |
+          mkdir tmp
+
       - name: Deployment with local tests
+        id: deploy
         run: |
           if [ -d force-app ]; then
-            npx sf project deploy start --source-dir force-app --test-level RunLocalTests --json
+            npx sf project deploy start --source-dir force-app --test-level RunLocalTests --json > tmp/results.json
           fi

@@ -4,6 +4,7 @@
 name: mega-linter
 
 on:
+  workflow_dispatch:
   # Trigger mega-linter at every push. Action will also be visible from Pull Requests to master
   # push: # Comment this line to trigger action only on pull-requests (not recommended if you don't pay for GH Actions)
   pull_request:
@@ -27,11 +28,10 @@ jobs:
           cancel_others: true
 
   build:
-    name: MegaLinter
+    name: MegaLinter build
     runs-on: ubuntu-latest
     steps:
-      # Git Checkout
-      - name: Checkout Code
+      - name: Checkout repo
         uses: actions/checkout@v3
         with:
           token: ${{ secrets.PAT || secrets.GITHUB_TOKEN }}
@@ -41,11 +41,10 @@ jobs:
       - name: MegaLinter
         id: ml
         # You can override Mega-Linter flavor used to have faster performances
-        # More info at https://nvuillam.github.io/mega-linter/flavors/
-        uses: nvuillam/mega-linter@v4
+        # More info at http://megalinter.io/latest/flavors
+        uses: oxsecurity/megalinter@v7.4.0
         env:
-          # All available variables are described in documentation
-          # https://nvuillam.github.io/mega-linter/configuration/
+          # http://megalinter.io/latest/configuration
           VALIDATE_ALL_CODEBASE: true # Set ${{ github.event_name == &#39;push&#39; &amp;&amp; github.ref == &#39;refs/heads/master&#39; }} to validate only diff with master branch
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # ADD YOUR CUSTOM ENV VARIABLES HERE TO OVERRIDE VALUES OF .mega-linter.yml AT THE ROOT OF YOUR REPOSITORY
@@ -53,7 +52,7 @@ jobs:
       # Upload Mega-Linter artifacts
       - name: Archive production artifacts
         if: ${{ success() }} || ${{ failure() }}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Mega-Linter reports
           path: |
@@ -64,7 +63,7 @@ jobs:
       - name: Create pr with applied fixes
         id: cpr
         if: steps.ml.outputs.has_updated_sources == 1 && (env.APPLY_FIXES_EVENT == 'all' || env.APPLY_FIXES_EVENT == github.event_name) && env.APPLY_FIXES_MODE == 'pull_request' && (github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository) && !contains(github.event.head_commit.message, 'skip fix')
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.PAT || secrets.GITHUB_TOKEN }}
           commit-message: "[Mega-Linter] Apply linters automatic fixes"

@@ -11,7 +11,7 @@ on:
       - fix/**
 
 jobs:
-  # Cancel duplicate jobs: https://github.com/fkirc/skip-duplicate-actions#option-3-cancellation-only
+  # https://github.com/fkirc/skip-duplicate-actions#option-3-cancellation-only
   cancel-duplicate-jobs:
     name: Cancel duplicate jobs
     runs-on: ubuntu-latest
