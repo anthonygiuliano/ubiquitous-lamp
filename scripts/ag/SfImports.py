@@ -1,7 +1,7 @@
-import re
-import os
-from typing import Any, Callable, Literal
-from enum import Enum
+import re  # https://docs.python.org/3/library/re.html
+import os  # https://docs.python.org/3/library/os.html
+from typing import Any  # https://docs.python.org/3/library/typing.html
+from enum import Enum  # https://docs.python.org/3/library/enum.html
 from xml.etree.ElementTree import (
     ElementTree,
 )  # https://docs.python.org/3/library/xml.etree.elementtree.html
@@ -85,98 +85,104 @@ class SfCommands(SfEnum):
     USERS = "sf data query --query 'SELECT Id, FirstName, LastName, Email, Username FROM User'"
 
 
-class SfFindPatterns(SfEnum):
+class SfPatterns(SfEnum):
     ANSI = re.compile(pattern=r"\x1b\[.*?m|\n")
-    EMAIL = re.compile(
+    NO_USER_FOUND_ID = re.compile(
+        pattern=r"no User named \b(?P<match_name>[A-Za-z0-9._%+-]+)@[^@])+\.(?P<match_suffix>[A-Za-z]+)\b found"
+    )
+    NO_USER_FOUND_NO_MATCH = re.compile(
+        pattern=r"no User named \b[A-Za-z0-9._%+-]+@[^@]+\.[A-Za-z]+\b found"
+    )
+    NO_USER_FOUND_FIX = re.compile(
         pattern=r"\b(?P<match_name>[A-Za-z0-9._%+-]+)@[^@]+\.(?P<match_suffix>[A-Za-z]+)\b"
     )
-    INSTANCE_URL = re.compile(
-        pattern=r"https://(www\.)?(?P<instance>[^/]+)\.my\.salesforce\.com"
-    )
-    ERROR_NO_USER_FOUND = re.compile(
-        pattern=r"no User named \b(?P<match_name>[A-Za-z0-9._%+-]+)(?P<match_domain>@[^@])+\.(?P<match_suffix>[A-Za-z]+)\b found"
-    )
-    ERROR_DEFAULT_CERTIFICATE = re.compile(
+    DEFAULT_CERTIFICATE_ID = re.compile(
         pattern=r"\bThe default certificate cannot be selected as the Request Signing Certificate\b"
     )
-    ERROR_REQUIRED_LAYOUT_FIELD = re.compile(
-        pattern=r"\bLayout must contain an item for required layout field: (?P<match_field>[A-Za-z0-9._%+-])+"
-    )
-
-
-class SfFixPatterns(SfEnum):
-    ERROR_NO_USER_FOUND = re.compile(
-        pattern=r"\b(?P<match_name>[A-Za-z0-9._%+-]+)@[^@]+\.(?P<match_suffix>[A-Za-z]+)\b"
-    )
-    ERROR_DEFAULT_CERTIFICATE = re.compile(
+    DEFAULT_CERTIFICATE_FIX = re.compile(
         pattern=r"https://(www\.)?(?P<instance>[^/]+)\.my\.salesforce\.com"
     )
-    ERROR_REQUIRED_LAYOUT_FIELD = re.compile(pattern=r"TODO FIND END OF PAGE LAYOUT")
+    REQUIRED_LAYOUT_FIELD_ID = re.compile(
+        pattern=r"\bLayout must contain an item for required layout field: (?P<match_field>[A-Za-z0-9._%+-])+"
+    )
+    REQUIRED_LAYOUT_FIELD_FIX = re.compile(pattern=r"# TODO FIND END OF PAGE LAYOUT")
 
 
-class SfFixFunctions(SfEnum):
-    ERROR_NO_USER_FOUND = lambda: None
-    ERROR_DEFAULT_CERTIFICATE = lambda: None
-    ERROR_REQUIRED_LAYOUT_FIELD = lambda: None
-
-    def fix_no_user_found(
-        self, xml_path: str, match_groups: dict[str, str], users_df: pd.DataFrame
+class SfFixes:
+    @staticmethod
+    def NO_USER_FOUND_FN(
+        xml_path: str, match_groups: dict[str, str], users_df: pd.DataFrame
     ) -> None:
         elem: ElementTree = ElementTree(file=xml_path)
         match_name: str = match_groups["match_name"]
         match_suffix: str = match_groups["match_suffix"]
-
         user: pd.DataFrame = users_df.loc[
             (users_df["Username_Name"] == match_name)
             & (users_df["Username_Suffix"] == match_suffix),
             :,
         ]
-
         if user.empty:
             user = users_df.loc[
                 (users_df["Username_Name"] == match_name),
                 :,
             ]
-
         username_new: str = str(
             object=user.loc[
                 0,
                 "Username",
             ]
         )
-
         print(f"--- replace_invalid_users: username_new ---")
         print(f"username_new: {username_new}")
-
         email_new: str = str(
             object=user.loc[
                 0,
                 "Email",
             ]
         )
-
         print(f"--- replace_invalid_users: email_new ---")
         print(f"email_new: {email_new}")
 
-    def fix_default_certificate(
-        self, xml_path: str, match_groups: dict[str, str], users_df: pd.DataFrame
-    ) -> None:
-        pass
+        # TODO: Modify xml in place
+        return None
 
-    def fix_required_layout_field(
-        self, xml_path: str, match_groups: dict[str, str], users_df: pd.DataFrame
+    @staticmethod
+    def DEFAULT_CERTIFICATE_FN(
+        xml_path: str, match_groups: dict[str, str], users_df: pd.DataFrame
     ) -> None:
-        pass
+        # TODO
+        return None
+
+    @staticmethod
+    def REQUIRED_LAYOUT_FIELD_FN(
+        xml_path: str, match_groups: dict[str, str], users_df: pd.DataFrame
+    ) -> None:
+        # TODO
+        return None
+
+
+class SfErrors(SfEnum):
+    NO_USER_FOUND = {
+        "ID": SfPatterns.NO_USER_FOUND_ID,
+        "FIX": SfPatterns.NO_USER_FOUND_FIX,
+        "FN": SfFixes.NO_USER_FOUND_FN,
+    }
+    DEFAULT_CERTIFICATE = {
+        "ID": SfPatterns.DEFAULT_CERTIFICATE_ID,
+        "FIX": SfPatterns.DEFAULT_CERTIFICATE_FIX,
+        "FN": SfFixes.DEFAULT_CERTIFICATE_FN,
+    }
+    REQUIRED_LAYOUT_FIELD = {
+        "ID": SfPatterns.REQUIRED_LAYOUT_FIELD_ID,
+        "FIX": SfPatterns.REQUIRED_LAYOUT_FIELD_FIX,
+        "FN": SfFixes.REQUIRED_LAYOUT_FIELD_FN,
+    }
 
 
 def main() -> None:
-    print("yes main")
-    for value in SfPaths.values():
-        print(f"value: {value}")
+    print("MAIN")
     pass
 
 
 if __name__ == "__main__":
-    print("no main")
-    for value in SfPaths.values():
-        print(f"value: {value}")
+    pass
