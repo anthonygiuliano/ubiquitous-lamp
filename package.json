@@ -44,5 +44,8 @@
     "sfdx-git-delta": "^5.27.0",
     "sfdx-hardis": "^4.9.1",
     "texei-sfdx-plugin": "^2.1.3"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0"
   }
 }
