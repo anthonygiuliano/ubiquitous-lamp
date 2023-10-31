@@ -81,17 +81,15 @@ class SfPaths(SfEnum):
 
 
 class SfCommands(SfEnum):
-    DEPLOY = f"sf project deploy start --source-dir {SfPaths.METADATA.value} --test-level RunLocalTests --dry-run --concise"
-    USERS = "sf data query --query 'SELECT Id, FirstName, LastName, Email, Username FROM User'"
+    ORG = f"sf org display user --json"
+    DEPLOY = f"sf project deploy start --source-dir {SfPaths.METADATA.value} --test-level RunLocalTests --dry-run --json --concise"
+    USERS = "sf data query --query 'SELECT Id, FirstName, LastName, Email, Username FROM User' --json"
 
 
 class SfPatterns(SfEnum):
     ANSI = re.compile(pattern=r"\x1b\[.*?m|\n")
     NO_USER_FOUND_ID = re.compile(
         pattern=r"no User named \b(?P<match_name>[A-Za-z0-9._%+-]+)@[^@])+\.(?P<match_suffix>[A-Za-z]+)\b found"
-    )
-    NO_USER_FOUND_NO_MATCH = re.compile(
-        pattern=r"no User named \b[A-Za-z0-9._%+-]+@[^@]+\.[A-Za-z]+\b found"
     )
     NO_USER_FOUND_FIX = re.compile(
         pattern=r"\b(?P<match_name>[A-Za-z0-9._%+-]+)@[^@]+\.(?P<match_suffix>[A-Za-z]+)\b"
@@ -111,19 +109,18 @@ class SfPatterns(SfEnum):
 class SfFixes:
     @staticmethod
     def NO_USER_FOUND_FN(
-        xml_path: str, match_groups: dict[str, str], users_df: pd.DataFrame
+        xml_path: str, fix_pattern: re.Pattern, users_df: pd.DataFrame
     ) -> None:
         elem: ElementTree = ElementTree(file=xml_path)
-        match_name: str = match_groups["match_name"]
-        match_suffix: str = match_groups["match_suffix"]
+        # Iterate over xml looking for matches against fix pattern
         user: pd.DataFrame = users_df.loc[
-            (users_df["Username_Name"] == match_name)
-            & (users_df["Username_Suffix"] == match_suffix),
+            (users_df["Username_Name"] == "match_name")
+            & (users_df["Username_Suffix"] == "match_suffix"),
             :,
         ]
         if user.empty:
             user = users_df.loc[
-                (users_df["Username_Name"] == match_name),
+                (users_df["Username_Name"] == "match_name"),
                 :,
             ]
         username_new: str = str(
