@@ -1,0 +1,1 @@
+sf project generate manifest --name package-all --output-dir manifest --from-org ag.prod
