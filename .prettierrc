@@ -5,9 +5,7 @@
     {
       "files": "**/lwc/**/*.html",
       "options": {
-        "parser": "lwc",
-        "useTabs": true,
-        "tabWidth": 4
+        "parser": "lwc"
       }
     },
     {
@@ -19,17 +17,13 @@
     {
       "files": "*.{cls,trigger}",
       "options": {
-        "parser": "apex",
-        "useTabs": true,
-        "tabWidth": 4
+        "parser": "apex"
       }
     },
     {
       "files": "scripts/**/*.apex",
       "options": {
-        "parser": "apex-anonymous",
-        "useTabs": true,
-        "tabWidth": 4
+        "parser": "apex-anonymous"
       }
     },
     {
