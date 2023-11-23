@@ -11,16 +11,6 @@ on:
       - fix/**
 
 jobs:
-  # https://github.com/fkirc/skip-duplicate-actions#option-3-cancellation-only
-  cancel-duplicate-jobs:
-    name: Cancel duplicate jobs
-    runs-on: ubuntu-latest
-    steps:
-      - uses: fkirc/skip-duplicate-actions@master
-        with:
-          github_token: ${{ secrets.PAT || secrets.GITHUB_TOKEN }}
-          cancel_others: true
-
   update-npm-cache:
     name: Update npm cache
     permissions: write-all
