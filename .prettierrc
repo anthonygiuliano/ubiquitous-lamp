@@ -1,5 +1,6 @@
 {
-  "trailingComma": "none",
+  "trailingComma": "all",
+  "tabWidth": 2,
   "plugins": ["prettier-plugin-apex", "@prettier/plugin-xml"],
   "overrides": [
     {
@@ -29,7 +30,9 @@
     {
       "files": "*.xml",
       "options": {
-        "bracketSameLine": true
+        "parser": "xml",
+        "xmlWhitespaceSensitivity": "strict",
+        "xmlSelfClosingSpace": true
       }
     }
   ]
