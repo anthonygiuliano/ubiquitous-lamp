@@ -18,21 +18,20 @@
     "@salesforce/cli": "^2.17.14",
     "@salesforce/eslint-config-lwc": "^3.5.2",
     "@salesforce/eslint-plugin-aura": "^2.1.0",
-    "@salesforce/plugin-packaging": "^1.27.2",
+    "@salesforce/plugin-packaging": "^1.27.3",
     "@salesforce/sfdx-scanner": "^3.18.0",
     "@types/dotenv": "^8.2.0",
     "babel-eslint": "^10.1.0",
     "dotenv": "^16.3.1",
     "eslint": "^8.54.0",
     "jsforce": "^1.11.1",
-    "node-jq": "^4.2.2",
     "npm-check-updates": "^16.14.11",
     "prettier": "^3.1.0",
     "prettier-plugin-apex": "^2.0.1",
     "sfdmu": "^4.32.1",
     "sfdx-essentials": "^2.12.0",
     "sfdx-git-delta": "^5.30.0",
-    "sfdx-hardis": "^4.14.0",
+    "sfdx-hardis": "^4.16.1",
     "texei-sfdx-plugin": "^2.2.0"
   }
 }
