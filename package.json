@@ -31,7 +31,7 @@
     "sfdmu": "^4.32.1",
     "sfdx-essentials": "^2.12.0",
     "sfdx-git-delta": "^5.30.0",
-    "sfdx-hardis": "^4.16.1",
+    "sfdx-hardis": "^4.17.1",
     "texei-sfdx-plugin": "^2.2.0"
   }
 }
