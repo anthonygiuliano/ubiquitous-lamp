@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@prettier/plugin-xml": "^3.2.2",
-    "@salesforce/cli": "^2.17.14",
+    "@salesforce/cli": "^2.19.8",
     "@salesforce/eslint-config-lwc": "^3.5.2",
     "@salesforce/eslint-plugin-aura": "^2.1.0",
     "@salesforce/plugin-packaging": "^1.27.3",
@@ -31,7 +31,7 @@
     "sfdmu": "^4.32.1",
     "sfdx-essentials": "^2.12.0",
     "sfdx-git-delta": "^5.30.0",
-    "sfdx-hardis": "^4.17.1",
+    "sfdx-hardis": "^4.18.3",
     "texei-sfdx-plugin": "^2.2.0"
   }
 }
