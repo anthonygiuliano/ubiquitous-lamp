@@ -19,7 +19,7 @@
     "@salesforce/eslint-config-lwc": "^3.5.2",
     "@salesforce/eslint-plugin-aura": "^2.1.0",
     "@salesforce/plugin-packaging": "^1.27.7",
-    "@salesforce/sfdx-scanner": "^3.18.0",
+    "@salesforce/sfdx-scanner": "^3.19.0",
     "@types/dotenv": "^8.2.0",
     "babel-eslint": "^10.1.0",
     "dotenv": "^16.3.1",
