@@ -1,6 +1,5 @@
 {
-  "trailingComma": "all",
-  "tabWidth": 2,
+  "trailingComma": "es5",
   "plugins": ["prettier-plugin-apex", "@prettier/plugin-xml"],
   "overrides": [
     {
