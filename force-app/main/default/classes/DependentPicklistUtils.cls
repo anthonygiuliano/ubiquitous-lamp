@@ -14,7 +14,7 @@
  */
 
 public with sharing class DependentPicklistUtils {
-  public static Map<String, List<String>> getDependentValuesMap(
+  public static Map<String, List<String>> getDependentValues(
     String objectName,
     String dependentName
   ) {
@@ -60,12 +60,12 @@ public with sharing class DependentPicklistUtils {
     return resultMap;
   }
 
-  public static List<String> getDependentValuesMap(
+  public static List<String> getDependentValues(
     String objectName,
     String dependentName,
     String controllerValue
   ) {
-    Map<String, List<String>> resultMap = getDependentValuesMap(
+    Map<String, List<String>> resultMap = getDependentValues(
       objectName,
       dependentName
     );
