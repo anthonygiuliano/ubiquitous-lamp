@@ -1,6 +1,6 @@
 String objectName = 'Account';
 String fieldName = 'UpsellOpportunity__c';
-Map<String,List<String>> valueMap = DependentPicklistUtils.getDependentValuesMap(objectName, fieldName);
+Map<String,List<String>> valueMap = DependentPicklistUtils.getDependentValues(objectName, fieldName);
 
 for (String key : valueMap.keySet()) {
     System.debug('Controller Picklist Value: ' + key);
@@ -10,7 +10,7 @@ for (String key : valueMap.keySet()) {
 
 String controllerValue = 'Customer - Direct';
 
-List<String> dependentValues = DependentPicklistUtils.getDependentValuesMap(objectName, fieldName, controllerValue);
+List<String> dependentValues = DependentPicklistUtils.getDependentValues(objectName, fieldName, controllerValue);
 for (String value : dependentValues) {
     System.debug('Controlling Field Value: ' + controllerValue);
     System.debug('Dependent Picklist Value: ' + value);
