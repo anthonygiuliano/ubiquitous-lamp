@@ -18,17 +18,12 @@ public with sharing class DependentPicklistUtils {
     String objectName,
     String dependentName
   ) {
-    List<String> objectNameList = new List<String>{ objectName };
-    DescribeSObjectResult objectDescribe;
-    SObjectField dependent;
-    SObjectField controller;
-    try {
-      objectDescribe = Schema.describeSObjects(objectNameList)[0];
-      dependent = objectDescribe.fields.getMap().get(dependentName);
-      controller = dependent.getDescribe().getController();
-    } catch (InvalidParameterValueException e) {
-      System.debug(e.getMessage());
-    }
+    Map<String, SObjectField> fieldMap = getDependentAndController(
+      objectName,
+      dependentName
+    );
+    SObjectField dependent = fieldMap.get('dependent');
+    SObjectField controller = fieldMap.get('controller');
 
     // validFor property cannot be accessed via a method or a property,
     // so we need to serialize the PicklistEntry object and then deserialize into a wrapper.
@@ -81,35 +76,25 @@ public with sharing class DependentPicklistUtils {
     String objectName,
     String dependentName
   ) {
-    List<String> objectNameList = new List<String>{ objectName };
-    DescribeSObjectResult obj;
-    SObjectField dependent;
-    SObjectField controller;
-    try {
-      obj = Schema.describeSObjects(objectNameList)[0];
-      dependent = obj.fields.getMap().get(dependentName);
-      controller = dependent.getDescribe().getController();
-    } catch (InvalidParameterValueException e) {
-      System.debug(e.getMessage());
-    }
+    Map<String, SObjectField> fieldMap = getDependentAndController(
+      objectName,
+      dependentName
+    );
+    SObjectField controller = fieldMap.get('controller');
     return controller.getDescribe().getName();
   }
 
   public static List<String> getControllerValues(
     String objectName,
-    String fieldName
+    String dependentName
   ) {
-    List<String> objectNameList = new List<String>{ objectName };
-    DescribeSObjectResult obj;
-    SObjectField dependent;
-    SObjectField controller;
-    try {
-      obj = Schema.describeSObjects(objectNameList)[0];
-      dependent = obj.fields.getMap().get(fieldName);
-      controller = dependent.getDescribe().getController();
-    } catch (InvalidParameterValueException e) {
-      System.debug(e.getMessage());
-    }
+    Map<String, SObjectField> fieldMap = getDependentAndController(
+      objectName,
+      dependentName
+    );
+    SObjectField dependent = fieldMap.get('dependent');
+    SObjectField controller = fieldMap.get('controller');
+
     List<PicklistEntry> controllerEntries = controller.getDescribe()
       .getPicklistValues();
     List<String> controllerValues = new List<String>();
@@ -122,16 +107,16 @@ public with sharing class DependentPicklistUtils {
 
   public static Map<String, SObjectField> getDependentAndController(
     String objectName,
-    String fieldName
+    String dependentName
   ) {
     List<String> objectNameList = new List<String>{ objectName };
-    DescribeSObjectResult obj;
+    DescribeSObjectResult objectDescribe;
     SObjectField dependent;
     SObjectField controller;
     Map<String, SObjectField> resultMap = new Map<String, SObjectField>();
     try {
-      obj = Schema.describeSObjects(objectNameList)[0];
-      dependent = obj.fields.getMap().get(fieldName);
+      objectDescribe = Schema.describeSObjects(objectNameList)[0];
+      dependent = objectDescribe.getMap().get(dependentName);
       controller = dependent.getDescribe().getController();
     } catch (InvalidParameterValueException e) {
       System.debug(e.getMessage());
