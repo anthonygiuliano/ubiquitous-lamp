@@ -14,7 +14,7 @@
  */
 
 public with sharing class DependentPicklistUtils {
-  public static Map<String, List<String>> getDependentValues(
+  public static Map<String, List<String>> getDependentValuesMap(
     String objectName,
     String dependentName
   ) {
@@ -60,12 +60,12 @@ public with sharing class DependentPicklistUtils {
     return resultMap;
   }
 
-  public static List<String> getDependentValues(
+  public static List<String> getDependentValuesMap(
     String objectName,
     String dependentName,
     String controllerValue
   ) {
-    Map<String, List<String>> resultMap = getDependentValues(
+    Map<String, List<String>> resultMap = getDependentValuesMap(
       objectName,
       dependentName
     );
@@ -116,7 +116,7 @@ public with sharing class DependentPicklistUtils {
     Map<String, SObjectField> resultMap = new Map<String, SObjectField>();
     try {
       objectDescribe = Schema.describeSObjects(objectNameList)[0];
-      dependent = objectDescribe.getMap().get(dependentName);
+      dependent = objectDescribe.fields.getMap().get(dependentName);
       controller = dependent.getDescribe().getController();
     } catch (InvalidParameterValueException e) {
       System.debug(e.getMessage());
