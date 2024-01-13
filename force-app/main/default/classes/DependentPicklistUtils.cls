@@ -14,6 +14,13 @@
  */
 
 public with sharing class DependentPicklistUtils {
+  /**
+   *
+   * @description Returns a map of controlling field values to dependent field values
+   * @param objectName API name of the object containing the dependent picklist field
+   * @param dependentName API name of the dependent picklist field
+   * @return Map whose keys are the controlling field values, and whose values are lists of values available for the dependent field
+   */
   public static Map<String, List<String>> getDependentValues(
     String objectName,
     String dependentName
@@ -68,6 +75,13 @@ public with sharing class DependentPicklistUtils {
     return resultMap;
   }
 
+  /**
+   * @description Returns a list of dependent picklist values for the given controlling field value
+   * @param objectName API name of the object containing the dependent picklist field
+   * @param dependentName API name of the dependent picklist field
+   * @param controllerValue Value from the controlling field whose dependent values should be returned
+   * @return List of dependent picklist values for the given controlling field value
+   */
   public static List<String> getDependentValues(
     String objectName,
     String dependentName,
@@ -84,56 +98,6 @@ public with sharing class DependentPicklistUtils {
     // Return the list of dependent picklist values for the given controlling field value.
     // If the controlling field value is not in the map, this will return null.
     return resultMap?.get(controllerValue);
-  }
-
-  public static String getControllerName(
-    String objectName,
-    String dependentName
-  ) {
-    // Call the getDependentAndController method to get a map of the dependent and controlling fields
-    // for the given object and field.
-    Map<String, SObjectField> fieldMap = getDependentAndController(
-      objectName,
-      dependentName
-    );
-
-    // Retrieve the controlling field from the map.
-    SObjectField controller = fieldMap.get('controller');
-
-    // Return the API name of the controlling field.
-    return controller.getDescribe().getName();
-  }
-
-  public static List<String> getControllerValues(
-    String objectName,
-    String dependentName
-  ) {
-    // Call the getDependentAndController method to get a map of the dependent and controlling fields
-    // for the given object and field.
-    Map<String, SObjectField> fieldMap = getDependentAndController(
-      objectName,
-      dependentName
-    );
-
-    // Retrieve the dependent and controlling fields from the map.
-    SObjectField dependent = fieldMap.get('dependent');
-    SObjectField controller = fieldMap.get('controller');
-
-    // Get the picklist values for the controlling field.
-    List<PicklistEntry> controllerEntries = controller.getDescribe()
-      .getPicklistValues();
-
-    // Initialize a list to store the labels of the controlling field's picklist values.
-    List<String> controllerValues = new List<String>();
-
-    // Iterate over the controlling field's picklist entries, adding each label to the list.
-    for (Schema.PicklistEntry ple : controllerEntries) {
-      String label = ple.getLabel();
-      controllerValues.add(label);
-    }
-
-    // Return the list of labels.
-    return controllerValues;
   }
 
   public static Map<String, SObjectField> getDependentAndController(
@@ -241,7 +205,7 @@ public with sharing class DependentPicklistUtils {
   ) {
     // This method is used to wrap the picklist entries into PicklistEntryWrapper objects.
     // This is done to access the validFor property, which is not directly accessible from the PicklistEntry objects.
-    
+
     // First, the picklist entries are serialized into a JSON string.
     // Then, the JSON string is deserialized into a list of PicklistEntryWrapper objects.
     // The resulting list of PicklistEntryWrapper objects is then returned.
